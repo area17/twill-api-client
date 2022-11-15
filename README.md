@@ -29,7 +29,7 @@ export { client }
 
 ### Nuxt 3
 
-In Nuxt 3, you can create a plugin that provide the Twill client to the app context.
+In Nuxt 3, you can create a plugin that provides the Twill client to the app context.
 
 ```js
 // plugins/twill.js
@@ -56,7 +56,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 })
 ```
 
-It will be available in the Nuxt context.
+It will then be available in the app context.
 
 ```js
 const { $twill } = useNuxtApp()
@@ -97,7 +97,7 @@ These three methods used by `transform` are also accesible.
 
 ## Query builder
 
-The query builder is useful to create construct your query to be sent to the JSON:API.
+The query builder is useful to construct a query to be sent to the JSON:API.
 
 - `filter`
 - `page`
