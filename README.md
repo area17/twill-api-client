@@ -1,5 +1,11 @@
 # JavaScript library for Twill's JSON:API
 
+This package can be used to fetch, normalize and deserialize resources from [Twill](https://github.com/area17/twill).
+
+The package assumes the Twill app uses [`twill-api`](https://github.com/area17/twill-api) to expose content through a JSON:API.
+
+The idea is to benefit from the conventions of the [JSON:API specification](https://jsonapi.org/) but benefit from a "flatter" structure easier to work with in JavaScript applications.
+
 ## Installation
 
 ```bash
