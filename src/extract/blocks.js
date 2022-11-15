@@ -1,22 +1,20 @@
-function blocks(resource, editorName = 'default') {
+function editor(resource, editorName = 'default') {
   const blocks = resource.blocks || resource
   return blocks
     .filter((block) => block.editorName === editorName)
     .sort((a, b) => a.position - b.position)
 }
 
-function allBlocks(resource) {
-  const blocks = resource?.blocks?.map((block) => block.editorName)
-
-  const uniqueEditors = [...new Set(blocks)]
-
+function blocks(resource) {
+  const editorNames = resource?.blocks?.map((block) => block.editorName)
+  const uniqueEditorNames = [...new Set(editorNames)]
   const editors = {}
 
-  uniqueEditors.map((editorName) => {
-    editors[editorName] = blocks(resource, editorName)
+  uniqueEditorNames.map((editorName) => {
+    editors[editorName] = editor(resource, editorName)
   })
 
   return editors
 }
 
-export { blocks, allBlocks }
+export { blocks, editor }

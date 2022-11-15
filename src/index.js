@@ -1,8 +1,8 @@
 import { QueryBuilder } from './QueryBuilder.js'
 import { normalize } from './normalize.js'
 import { deserialize } from './deserialize'
-import { allImages } from './extract/images.js'
-import { allBlocks } from './extract/blocks.js'
+import { blocks } from '@/extract/blocks.js'
+import { images } from '@/extract/images.js'
 
 const Twill = ({ url, prefix, version, token }) => {
   const baseURL = `${url}${prefix}/${version}`
@@ -44,8 +44,8 @@ const Twill = ({ url, prefix, version, token }) => {
 
   const extract = (resource) => {
     return {
-      images: allImages(resource),
-      editors: allBlocks(resource)
+      images: images(resource),
+      editors: blocks(resource)
     }
   }
 

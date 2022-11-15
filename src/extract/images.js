@@ -1,34 +1,31 @@
-function allImages(resource) {
+function images(resource) {
   const roles = resource?.media?.map((media) => media.meta.role)
-
   const uniqueRoles = [...new Set(roles)]
-
-  const allImages = {}
+  const images = {}
 
   uniqueRoles.map((role) => {
-    allImages[role] = images(resource, role)
+    images[role] = media(resource, role)
   })
 
-  return allImages
+  return images
 }
 
-function images(resource, role, crop) {
-  const byRoles = imagesByRole(resource, role)
-
+function media(resource, role, crop) {
+  const media = mediaByRole(resource, role)
   let images = []
 
   if (crop) {
-    ibyRoles.map((imageByRole) => {
+    media.map((imageByRole) => {
       images.push(imageByRole[crop])
     })
   } else {
-    images = byRoles
+    images = media
   }
 
   return images
 }
 
-function imagesByRole(resource, role) {
+function mediaByRole(resource, role) {
   if (!resource.media) {
     return []
   }
@@ -52,4 +49,4 @@ function imagesByRole(resource, role) {
   return Object.values(imagesByUUID)
 }
 
-export { allImages, images, imagesByRole }
+export { images, media, mediaByRole }
