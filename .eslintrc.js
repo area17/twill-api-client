@@ -5,7 +5,6 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'plugin:import/recommended',
-    'plugin:jsx-a11y/recommended',
     'plugin:@typescript-eslint/recommended',
     'eslint-config-prettier'
   ],
@@ -13,7 +12,7 @@ module.exports = {
     'import/resolver': {
       node: {
         paths: ['src'],
-        extensions: ['.js', '.jsx', '.ts', '.tsx']
+        extensions: ['.js', '.ts']
       }
     }
   },
