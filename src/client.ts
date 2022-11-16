@@ -2,7 +2,7 @@ import { stringify } from 'qs'
 import { ofetch } from 'ofetch'
 
 export const client = () => {
-  return async (url, fetchOptions = {}) => {
+  return async (url: string, fetchOptions: Record<string, any> = {}) => {
     const headers = {
       ...(fetchOptions.headers || {})
     }
