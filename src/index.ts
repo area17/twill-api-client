@@ -1,5 +1,5 @@
 import { QueryBuilder } from './QueryBuilder'
-import type { DataResponse, Resource } from './types/jsonapi'
+import { type ID, type DataResponse, type Resource } from './types/jsonapi'
 // @ts-ignore
 import { normalize } from './normalize.js'
 // @ts-ignore
@@ -9,14 +9,14 @@ import { blocks } from '@/extract/blocks.js'
 // @ts-ignore
 import { images } from '@/extract/images.js'
 
-interface TwillOptions {
+export interface TwillOptions {
   url: string
   token: string
   prefix: string
   version: string
 }
 
-const Twill = (options: TwillOptions) => {
+export const Twill = (options: TwillOptions) => {
   const { url, prefix, version, token } = options
   const baseURL = `${url}${prefix}/${version}`
 
@@ -36,21 +36,35 @@ const Twill = (options: TwillOptions) => {
       headers
     })
 
-  const findOne = (resource: string, id: string | number) =>
+  const findOne = (resource: string, id: ID | number | number) =>
     new QueryBuilder({
       path: `${resource}/${id}`,
       baseURL,
       headers
     })
 
-  const findRelated = (resource: string, response: Resource) => {
-    const path = response.relationships[resource].links.related
+  const findRelated = (
+    resource: string,
+    response: Resource
+  ): QueryBuilder | null => {
+    const path = response.relationships[resource]?.links?.related
+
+    if (!path) {
+      return null
+    }
 
     return new QueryBuilder({ path, headers })
   }
 
-  const findRelationship = (resource: string, response: Resource) => {
-    const path = response.relationships[resource].links.self
+  const findRelationship = (
+    resource: string,
+    response: Resource
+  ): QueryBuilder | null => {
+    const path = response.relationships[resource]?.links?.self
+
+    if (!path) {
+      return null
+    }
 
     return new QueryBuilder({ path, headers })
   }
@@ -85,5 +99,3 @@ const Twill = (options: TwillOptions) => {
     transform
   }
 }
-
-export { Twill }

@@ -1,11 +1,11 @@
-interface JsonResponse {
+export interface JsonResponse {
   jsonapi: {
     version: string
-    meta: Record<string, any>
+    meta?: Record<string, any>
   }
 }
 
-interface DataResponse extends JsonResponse {
+export interface DataResponse extends JsonResponse {
   links: Links
   data: Resource | Resource[]
   included?: Resource[]
@@ -15,27 +15,27 @@ interface DataResponse extends JsonResponse {
   }
 }
 
-interface ErrorResponse extends JsonResponse {
+export interface ErrorResponse extends JsonResponse {
   errors: Error[]
 }
 
-type Response = DataResponse | ErrorResponse
+export type Response = DataResponse | ErrorResponse
 
-interface Error {
+export interface Error {
   detail: string
   source: any
   status: string
   title: string
 }
 
-interface Links {
+export interface Links {
   self: string
   [key: string]: string
 }
 
-interface Resource {
+export interface Resource {
   type: string
-  id: string
+  id: ID
   attributes: Attributes
   relationships: {
     [key: string]: Relationship
@@ -44,38 +44,29 @@ interface Resource {
   meta?: Record<string, any>
 }
 
-interface Attributes {
+export type ID = string | number
+
+export interface Attributes {
   [key: string]: any
 }
 
-interface Relationship {
+export interface Relationship {
   data: RelatedResource | RelatedResource[]
-  meta: Record<string, any>
-  links: Links
+  meta?: Record<string, any>
+  links?: Links
 }
 
-interface RelatedResource {
+export interface RelatedResource {
   type: string
-  id: string
+  id: ID
   meta?: Record<string, any>
 }
 
-interface Pagination {
+export interface Pagination {
   currentPage: number
   from: number
   lastPage: number
   perPage: number
   to: number
   total: number
-}
-
-export type {
-  Response,
-  DataResponse,
-  ErrorResponse,
-  Resource,
-  Pagination,
-  Attributes,
-  Relationship,
-  RelatedResource
 }

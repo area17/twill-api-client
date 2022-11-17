@@ -1,5 +1,5 @@
 import { client } from './client'
-import type { Response } from './types/jsonapi'
+import { type Response } from './types/jsonapi'
 
 interface QueryBuilder {
   path: string
