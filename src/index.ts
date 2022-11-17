@@ -1,4 +1,4 @@
-import { QueryBuilder } from './QueryBuilder'
+import { QueryBuilder } from './query-builder'
 import { type ID, type DataResponse, type Resource } from './types/jsonapi'
 // @ts-ignore
 import { normalize } from './normalize.js'
