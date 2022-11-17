@@ -1,4 +1,4 @@
-# JavaScript library for Twill's JSON:API
+# Client for Twill's JSON:API in TypeScript
 
 This package can be used to fetch, normalize and deserialize resources from [Twill](https://github.com/area17/twill).
 
@@ -9,7 +9,7 @@ The idea is to take advantage from the conventions of the [JSON:API specificatio
 ## Installation
 
 ```bash
-npm install @area17/twill
+npm install @area17/twill-api-client
 ```
 
 ## Getting started
@@ -18,7 +18,7 @@ npm install @area17/twill
 
 ```js
 // client.js
-import { Twill } from '@area17/twill'
+import { Twill } from '@area17/twill-api-client'
 
 const config = {
   url: config.TWILL_API_BASE,
@@ -39,7 +39,7 @@ In Nuxt 3, you can create a plugin that provides the Twill client to the app con
 
 ```js
 // plugins/twill.js
-import { Twill } from '@area17/twill'
+import { Twill } from '@area17/twill-api-client'
 
 export default defineNuxtPlugin((nuxtApp) => {
   const config = nuxtApp.$config
