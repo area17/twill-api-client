@@ -1,7 +1,5 @@
-// @ts-ignore
 import { camelCase } from 'lodash-es'
-// @ts-ignore
-import { camelCaseKeys } from '@/utils/camelCaseKeys'
+import { camelCaseKeys } from './utils/camel-case-keys'
 import { type NormalizedResult, type NormalizedStore } from './types/resources'
 import { Relationship, type DataResponse, type Resource } from './types/jsonapi'
 
@@ -9,7 +7,10 @@ import { Relationship, type DataResponse, type Resource } from './types/jsonapi'
  * Normalize the JSON:API response into categories by resource type
  * and indexed by the resource's ID.
  */
-export function normalize(response: DataResponse) {
+export function normalize(response: DataResponse): {
+  result: NormalizedResult[]
+  resources: NormalizedStore
+} {
   let data
 
   if (Array.isArray(response.data)) {

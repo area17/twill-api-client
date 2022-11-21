@@ -21,6 +21,7 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@types/lodash-es": "^4.17.6",
     "@types/qs": "^6.9.7",
     "@typescript-eslint/eslint-plugin": "^5.43.0",
     "@typescript-eslint/parser": "^5.43.0",
