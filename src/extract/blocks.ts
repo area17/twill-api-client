@@ -1,10 +1,10 @@
-import { DeserializedResource } from '../types/resources'
+import { Resource } from '../types/resources'
 import { Editors } from '../types/transforms'
 
-function editor<Type extends DeserializedResource>(
+function editor<Type extends Resource>(
   resource: Type,
   editorName = 'default'
-): DeserializedResource[] {
+): Resource[] {
   if (resource.blocks && Array.isArray(resource.blocks)) {
     return resource.blocks
       .filter((block) => block.editorName === editorName)
@@ -13,7 +13,7 @@ function editor<Type extends DeserializedResource>(
   return []
 }
 
-function blocks<Type extends DeserializedResource>(resource: Type): Editors {
+function blocks<Type extends Resource>(resource: Type): Editors {
   const editors = {} as Editors
 
   if (Array.isArray(resource.blocks)) {

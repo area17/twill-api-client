@@ -1,6 +1,6 @@
 import { camelCase, isEmpty } from 'lodash-es'
 import {
-  DeserializedResource,
+  Resource,
   ID,
   JsonApiRelatedResource,
   JsonApiResource,
@@ -14,7 +14,7 @@ function deserializeRelationships(
   resources: JsonApiRelatedResource[],
   store: NormalizedStore,
   depth: number
-): DeserializedResource[] {
+): Resource[] {
   return resources
     .map((resource) => deserializeRelationship(resource, store, depth))
     .filter((resource) => !!resource)
@@ -24,19 +24,17 @@ function deserializeRelationship(
   resource: JsonApiRelatedResource,
   store: NormalizedStore,
   depth: number
-): DeserializedResource {
-  return deserialize(resource, store, depth) as DeserializedResource
+): Resource {
+  return deserialize(resource, store, depth) as Resource
 }
 
 export function deserialize<Type extends { type: string; id: ID }>(
   result: Type[] | Type,
   store: NormalizedStore,
   depth = 0
-): DeserializedResource | DeserializedResource[] {
+): Resource | Resource[] {
   if (Array.isArray(result)) {
-    return result.map(
-      (result) => deserialize(result, store, depth) as DeserializedResource
-    )
+    return result.map((result) => deserialize(result, store, depth) as Resource)
   }
 
   const serializedResource: JsonApiResource =
@@ -52,10 +50,10 @@ export function deserialize<Type extends { type: string; id: ID }>(
    * If max depth is reached, simply return the serialized resource
    */
   if (depth > MAX_DEPTH) {
-    return { ...serializedResource } as DeserializedResource
+    return { ...serializedResource } as Resource
   }
 
-  let resource: DeserializedResource = {
+  let resource: Resource = {
     type: serializedResource.type,
     meta: serializedResource.meta,
     id: serializedResource.id,

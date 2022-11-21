@@ -1,10 +1,5 @@
 import { QueryBuilder } from './query-builder'
-import {
-  ID,
-  JsonApiDataResponse,
-  JsonApiResource,
-  DeserializedResource
-} from './types'
+import { ID, JsonApiDataResponse, JsonApiResource, Resource } from './types'
 import { normalize } from './normalize'
 import { deserialize } from './deserialize'
 import { blocks } from './extract/blocks'
@@ -71,7 +66,7 @@ export const Twill = (options: TwillOptions) => {
     return new QueryBuilder({ path, headers })
   }
 
-  const extract = (resource: DeserializedResource) => {
+  const extract = (resource: Resource) => {
     return {
       images: images(resource),
       editors: blocks(resource)
@@ -80,11 +75,11 @@ export const Twill = (options: TwillOptions) => {
 
   const transform = (response: JsonApiDataResponse) => {
     const normalized = normalize(response)
-    const resources: DeserializedResource[] = deserialize(
+    const resources: Resource[] = deserialize(
       normalized.result,
       normalized.resources
-    ) as DeserializedResource[]
-    return resources.map((resource: DeserializedResource) => {
+    ) as Resource[]
+    return resources.map((resource: Resource) => {
       return {
         ...resource,
         ...extract(resource)
