@@ -1,13 +1,12 @@
 import { QueryBuilder } from './query-builder'
 import { type ID, type DataResponse, type Resource } from './types/jsonapi'
-// @ts-ignore
-import { normalize } from './normalize.js'
+import { normalize } from './normalize'
+import { blocks } from './extract/blocks'
 // @ts-ignore
 import { deserialize } from './deserialize'
 // @ts-ignore
-import { blocks } from '@/extract/blocks.js'
-// @ts-ignore
 import { images } from '@/extract/images.js'
+import { DeserializedResource } from './types/resources'
 
 export interface TwillOptions {
   url: string
@@ -69,7 +68,7 @@ export const Twill = (options: TwillOptions) => {
     return new QueryBuilder({ path, headers })
   }
 
-  const extract = (resource: Resource) => {
+  const extract = (resource: DeserializedResource) => {
     return {
       images: images(resource),
       editors: blocks(resource)

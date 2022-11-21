@@ -15,7 +15,10 @@ export interface NormalizedResources {
 
 export interface NormalizedResource extends Resource {}
 
-export interface DeserializedResource {
+/**
+ * Deserialized resource
+ */
+export interface DeserializedResource extends Record<string, unknown> {
   id: ID
   type: string
   meta?: Record<string, any>
