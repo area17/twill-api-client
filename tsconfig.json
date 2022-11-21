@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "outDir": "./dist",
     "target": "ESNext",
     "useDefineForClassFields": true,
     "module": "ESNext",
@@ -15,5 +16,5 @@
     "noImplicitReturns": true,
     "skipLibCheck": true
   },
-  "include": ["src"]
+  "include": ["./src/**/*"]
 }
