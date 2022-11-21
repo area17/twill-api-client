@@ -2,9 +2,7 @@ import { QueryBuilder } from './query-builder'
 import { ID, JsonApiDataResponse, JsonApiResource, Resource } from './types'
 import { normalize } from './normalize'
 import { deserialize } from './deserialize'
-import { blocks } from './extract/blocks'
-// @ts-ignore
-import { images } from './extract/images'
+import { extract } from './extract'
 
 export interface TwillOptions {
   url: string
@@ -64,13 +62,6 @@ export const Twill = (options: TwillOptions) => {
     }
 
     return new QueryBuilder({ path, headers })
-  }
-
-  const extract = (resource: Resource) => {
-    return {
-      images: images(resource),
-      editors: blocks(resource)
-    }
   }
 
   const transform = (response: JsonApiDataResponse) => {

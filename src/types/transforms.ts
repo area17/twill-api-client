@@ -1,6 +1,3 @@
-// TODO make conditional to Has* interface
-// eg if HasBlocks, then blocks is Editors
-
 import { Resource } from './resources'
 import { OrNull } from './utils'
 
@@ -8,7 +5,7 @@ export interface HasTransforms {
   blocks: OrNull<Editors>
   media: OrNull<Images>
   files: OrNull<Files>
-  relatedITems: OrNull<RelatedItems>
+  browsers: OrNull<RelatedItems>
 }
 
 // type TEditors<Type> = Type extends HasBlocks

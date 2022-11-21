@@ -1,16 +1,9 @@
-import {
-  JsonApiAttributes,
-  JsonApiRelatedResource,
-  JsonApiRelationship,
-  JsonApiResource
-} from '../json-api'
+import { JsonApiAttributes, JsonApiRelatedResource } from '../json-api'
+import { Resource } from '../resources'
 
-export interface RelatedItemResource extends JsonApiResource {
+export interface RelatedItemResource extends Resource, RelatedItemAttributes {
   type: 'related-items'
-  attributes: RelatedItemAttributes
-  relationships: {
-    related: JsonApiRelationship<JsonApiRelatedResource>
-  }
+  related: Resource
 }
 
 export interface RelatedItemRelated extends JsonApiRelatedResource {
