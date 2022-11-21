@@ -6,7 +6,6 @@ import {
   DeserializedResource
 } from './types'
 import { normalize } from './normalize'
-// @ts-ignore
 import { deserialize } from './deserialize'
 import { blocks } from './extract/blocks'
 // @ts-ignore
