@@ -1,13 +1,19 @@
 import { camelCase } from 'lodash-es'
 import { camelCaseKeys } from './utils/camel-case-keys'
-import { type NormalizedResult, type NormalizedStore } from './types/resources'
-import { Relationship, type DataResponse, type Resource } from './types/jsonapi'
+import {
+  NormalizedResult,
+  NormalizedStore,
+  JsonApiRelationship,
+  JsonApiDataResponse,
+  JsonApiResource,
+  JsonApiRelatedResource
+} from './types'
 
 /**
  * Normalize the JSON:API response into categories by resource type
  * and indexed by the resource's ID.
  */
-export function normalize(response: DataResponse): {
+export function normalize(response: JsonApiDataResponse): {
   result: NormalizedResult[]
   resources: NormalizedStore
 } {
@@ -21,8 +27,8 @@ export function normalize(response: DataResponse): {
 
   const included = response.included || []
 
-  let result: NormalizedResult[] = []
-  let resources: NormalizedStore = {}
+  const result: NormalizedResult[] = []
+  const resources: NormalizedStore = {}
 
   data.forEach((resource) => {
     addResult(result, resource)
@@ -39,13 +45,13 @@ export function normalize(response: DataResponse): {
   }
 }
 
-function addResult(result: NormalizedResult[], resource: Resource) {
+function addResult(result: NormalizedResult[], resource: JsonApiResource) {
   const { type, id } = resource
 
   result.push({ type, id })
 }
 
-function addResource(resources: NormalizedStore, resource: Resource) {
+function addResource(resources: NormalizedStore, resource: JsonApiResource) {
   const { type, id, attributes, meta, links, relationships } = resource
 
   const resourceType = camelCase(type)
@@ -65,13 +71,16 @@ function addResource(resources: NormalizedStore, resource: Resource) {
 }
 
 function extractRelationships(responseRelationships: {
-  [key: string]: Relationship
-}): Record<string, Relationship> | undefined {
+  [key: string]: JsonApiRelationship<JsonApiRelatedResource>
+}): Record<string, JsonApiRelationship<JsonApiRelatedResource>> | undefined {
   if (!responseRelationships) {
     return undefined
   }
 
-  let relationships: Record<string, Relationship> = {}
+  const relationships: Record<
+    string,
+    JsonApiRelationship<JsonApiRelatedResource>
+  > = {}
 
   Object.keys(responseRelationships).map((type) => {
     const relationshipType = camelCase(type)

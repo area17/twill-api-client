@@ -1,12 +1,16 @@
 import { QueryBuilder } from './query-builder'
-import { type ID, type DataResponse, type Resource } from './types/jsonapi'
+import {
+  ID,
+  JsonApiDataResponse,
+  JsonApiResource,
+  DeserializedResource
+} from './types'
 import { normalize } from './normalize'
-import { blocks } from './extract/blocks'
 // @ts-ignore
 import { deserialize } from './deserialize'
+import { blocks } from './extract/blocks'
 // @ts-ignore
-import { images } from '@/extract/images.js'
-import { DeserializedResource } from './types/resources'
+import { images } from './extract/images'
 
 export interface TwillOptions {
   url: string
@@ -24,7 +28,7 @@ export const Twill = (options: TwillOptions) => {
     Accept: 'application/vnd.api+json'
   }
 
-  const get = (path: string) => {
+  const get = (path: string): QueryBuilder => {
     return new QueryBuilder({ path, headers })
   }
 
@@ -44,7 +48,7 @@ export const Twill = (options: TwillOptions) => {
 
   const findRelated = (
     resource: string,
-    response: Resource
+    response: JsonApiResource
   ): QueryBuilder | null => {
     const path = response.relationships[resource]?.links?.related
 
@@ -57,7 +61,7 @@ export const Twill = (options: TwillOptions) => {
 
   const findRelationship = (
     resource: string,
-    response: Resource
+    response: JsonApiResource
   ): QueryBuilder | null => {
     const path = response.relationships[resource]?.links?.self
 
@@ -75,10 +79,13 @@ export const Twill = (options: TwillOptions) => {
     }
   }
 
-  const transform = (response: DataResponse) => {
+  const transform = (response: JsonApiDataResponse) => {
     const normalized = normalize(response)
-    const resources: any = deserialize(normalized.result, normalized.resources)
-    return resources.map((resource: any) => {
+    const resources: DeserializedResource[] = deserialize(
+      normalized.result,
+      normalized.resources
+    ) as DeserializedResource[]
+    return resources.map((resource: DeserializedResource) => {
       return {
         ...resource,
         ...extract(resource)

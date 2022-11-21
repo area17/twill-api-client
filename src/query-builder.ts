@@ -1,45 +1,45 @@
 import { client } from './client'
-import { type Response } from './types/jsonapi'
-
-interface QueryBuilder {
-  path: string
-  baseURL?: string
-  headers?: Record<string, string>
-  params: QueryBuilderParams
-}
+import { JsonApiResponse } from './types'
 
 interface QueryBuilderParams {
-  filter?: Object
-  page?: Object
+  filter?: Record<string, unknown>
+  page?: Record<string, unknown>
   include?: string[] | string
-  fields?: Record<string, any>
+  fields?: Record<string, unknown>
   sort?: string
-  [key: string]: any
+  [key: string]: unknown
 }
 
 interface QueryBuilderOptions {
   path: string
   baseURL?: string
-  headers?: Record<string, string>
+  headers?: Headers
 }
 
-type QueryBuilderResponse = Promise<Response | null>
+type QueryBuilderResponse = Promise<JsonApiResponse | null>
 
-class QueryBuilder implements QueryBuilder {
+type Headers = Record<string, string>
+
+class QueryBuilder {
+  readonly path: string
+  readonly baseURL?: string
+  readonly headers?: Headers
+  params: QueryBuilderParams
+
   constructor(options: QueryBuilderOptions) {
     this.path = options.path
     this.baseURL = options.baseURL || ''
-    this.headers = options.headers || <Record<string, string>>{}
-    this.params = {}
+    this.headers = options.headers || ({} as Headers)
+    this.params = {} as QueryBuilderParams
   }
 
-  filter(filter: Object): QueryBuilder {
+  filter(filter: Record<string, unknown>): QueryBuilder {
     this.params.filter = { ...this.params.filter, ...filter }
 
     return this
   }
 
-  page(page: Object): QueryBuilder {
+  page(page: Record<string, unknown>): QueryBuilder {
     this.params.page = { ...this.params.page, ...page }
 
     return this
@@ -81,10 +81,10 @@ class QueryBuilder implements QueryBuilder {
       headers: this.headers
     }
 
-    let response: Response | null
+    let response: JsonApiResponse | null
 
     try {
-      response = (await api(this.path, options)) as Response
+      response = (await api(this.path, options)) as JsonApiResponse
     } catch (errors) {
       if (Array.isArray(errors))
         errors.map((error) =>
