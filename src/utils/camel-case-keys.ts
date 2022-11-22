@@ -2,7 +2,7 @@ import { camelCase, isObject } from 'lodash-es'
 
 export function camelCaseKeys<Type>(
   object: Type,
-  deep: boolean | null = false
+  deep: boolean | null = false,
 ): Record<string, unknown> | Type {
   if (!isObject(object)) {
     return object
@@ -14,7 +14,7 @@ export function camelCaseKeys<Type>(
       carry[key] = deep ? camelCaseKeys(entry[1]) : entry[1]
       return carry
     },
-    {} as Record<string, unknown>
+    {} as Record<string, unknown>,
   )
 }
 

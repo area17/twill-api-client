@@ -25,7 +25,7 @@ const config = {
   token: process.env.TWILL_API_AUTH_TOKEN,
   prefix: '/api',
   version: 'v1',
-  cookie: {}
+  cookie: {},
 }
 
 const client = new Twill(config)
@@ -49,15 +49,15 @@ export default defineNuxtPlugin((nuxtApp) => {
     token: config.TWILL_API_AUTH_TOKEN,
     prefix: '/api',
     version: 'v1',
-    cookie: {}
+    cookie: {},
   }
 
   const twill = Twill(api)
 
   return {
     provide: {
-      twill
-    }
+      twill,
+    },
   }
 })
 ```
@@ -71,7 +71,7 @@ try {
   response = await $twill
     .find('pages')
     .filter({
-      slug: 'about'
+      slug: 'about',
     })
     .include(['blocks.media', 'blocks.related-items.related', 'media'])
     .fetch()

@@ -3,7 +3,7 @@ import { Editors } from '../types/transforms'
 
 function editor<Type extends Resource>(
   resource: Type,
-  editorName = 'default'
+  editorName = 'default',
 ): Resource[] {
   if (resource.blocks && Array.isArray(resource.blocks)) {
     return resource.blocks

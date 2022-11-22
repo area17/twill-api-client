@@ -6,7 +6,7 @@ import {
   JsonApiRelationship,
   JsonApiDataResponse,
   JsonApiResource,
-  JsonApiRelatedResource
+  JsonApiRelatedResource,
 } from './types'
 
 /**
@@ -41,7 +41,7 @@ export function normalize(response: JsonApiDataResponse): {
 
   return {
     result,
-    resources
+    resources,
   }
 }
 
@@ -64,7 +64,7 @@ function addResource(resources: NormalizedStore, resource: JsonApiResource) {
     attributes: camelCaseKeys(attributes || {}),
     relationships: extractRelationships(relationships) || {},
     meta,
-    links
+    links,
   }
 
   return resources

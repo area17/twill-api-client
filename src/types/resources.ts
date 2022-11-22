@@ -3,7 +3,7 @@ import {
   BlockResource,
   RelatedItemResource,
   MediaResource,
-  FileResource
+  FileResource,
 } from '../types'
 
 export interface Resource extends Record<string, unknown> {

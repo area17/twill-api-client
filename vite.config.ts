@@ -6,13 +6,13 @@ export default {
     lib: {
       entry: 'src/index.ts',
       name: 'Twill',
-      fileName: 'twill'
-    }
+      fileName: 'twill',
+    },
   },
   plugins: [dts()],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src')
-    }
-  }
+      '@': path.resolve(__dirname, './src'),
+    },
+  },
 }

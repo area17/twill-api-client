@@ -78,7 +78,7 @@ class QueryBuilder {
     const options = {
       params: this.params,
       baseURL: this.baseURL,
-      headers: this.headers
+      headers: this.headers,
     }
 
     let response: JsonApiResponse | null
@@ -90,8 +90,8 @@ class QueryBuilder {
         errors.map((error) =>
           console.error(
             'QueryBuilderError:',
-            `${error.title} - ${error.detail} - ${this.path}`
-          )
+            `${error.title} - ${error.detail} - ${this.path}`,
+          ),
         )
       else {
         console.error('QueryBuilderError:', `${errors}`, `${this.path}`)

@@ -4,12 +4,12 @@ import { ofetch } from 'ofetch'
 export const client = () => {
   return async (url: string, fetchOptions: Record<string, any> = {}) => {
     const headers = {
-      ...(fetchOptions.headers || {})
+      ...(fetchOptions.headers || {}),
     }
 
     if (fetchOptions.params) {
       url = `${url}${url.includes('?') ? '&' : '?'}${stringify(
-        fetchOptions.params
+        fetchOptions.params,
       )}`
       delete fetchOptions.params
     }
@@ -18,7 +18,7 @@ export const client = () => {
       responseType: 'json',
       retry: 0,
       ...fetchOptions,
-      headers
+      headers,
     }).catch((error) => {
       throw error?.data?.errors || error
     })

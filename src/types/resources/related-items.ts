@@ -3,7 +3,7 @@ import {
   JsonApiRelatedResource,
   JsonApiRelationship,
   JsonApiResource,
-  Resource
+  Resource,
 } from '../../types'
 
 export interface JsonApiRelatedItemResource extends JsonApiResource {

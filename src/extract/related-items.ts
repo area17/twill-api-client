@@ -2,7 +2,7 @@ import { RelatedItemResource, RelatedItems, Resource, OrNull } from '../types'
 
 export function browser<Type extends Resource>(
   resource: Type,
-  browserName: string
+  browserName: string,
 ): Resource[] {
   const browsers: OrNull<Record<string, number[]>> =
     (resource.meta?.browsers as any) || null
@@ -35,7 +35,7 @@ export function browsers<Type extends Resource>(resource: Type): RelatedItems {
 
   if (Array.isArray(resource?.relatedItems)) {
     const browserNames: string[] = resource?.relatedItems.map(
-      (relatedItem: Resource) => relatedItem.browserName as string
+      (relatedItem: Resource) => relatedItem.browserName as string,
     )
     const uniqueBrowserNames = [...new Set(browserNames)]
 

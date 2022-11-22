@@ -8,6 +8,6 @@ export const extract = (resource: Resource) => {
   return {
     editors: blocks(resource),
     images: images(resource),
-    browsers: browsers(resource)
+    browsers: browsers(resource),
   }
 }

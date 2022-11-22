@@ -3,7 +3,7 @@ import {
   JsonApiMeta,
   JsonApiRelatedResource,
   JsonApiResource,
-  Resource
+  Resource,
 } from '../../types'
 
 export interface JsonApiMediaResource extends JsonApiResource {

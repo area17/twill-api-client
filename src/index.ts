@@ -17,7 +17,7 @@ export const Twill = (options: TwillOptions) => {
 
   const headers = {
     Authorization: `Bearer ${token}`,
-    Accept: 'application/vnd.api+json'
+    Accept: 'application/vnd.api+json',
   }
 
   const get = (path: string): QueryBuilder => {
@@ -28,19 +28,19 @@ export const Twill = (options: TwillOptions) => {
     new QueryBuilder({
       path: resource,
       baseURL,
-      headers
+      headers,
     })
 
   const findOne = (resource: string, id: ID | number | number) =>
     new QueryBuilder({
       path: `${resource}/${id}`,
       baseURL,
-      headers
+      headers,
     })
 
   const findRelated = (
     resource: string,
-    response: JsonApiResource
+    response: JsonApiResource,
   ): QueryBuilder | null => {
     const path = response.relationships[resource]?.links?.related
 
@@ -53,7 +53,7 @@ export const Twill = (options: TwillOptions) => {
 
   const findRelationship = (
     resource: string,
-    response: JsonApiResource
+    response: JsonApiResource,
   ): QueryBuilder | null => {
     const path = response.relationships[resource]?.links?.self
 
@@ -68,12 +68,12 @@ export const Twill = (options: TwillOptions) => {
     const normalized = normalize(response)
     const resources: Resource[] = deserialize(
       normalized.result,
-      normalized.resources
+      normalized.resources,
     ) as Resource[]
     return resources.map((resource: Resource) => {
       return {
         ...resource,
-        ...extract(resource)
+        ...extract(resource),
       }
     })
   }
@@ -87,6 +87,6 @@ export const Twill = (options: TwillOptions) => {
     normalize,
     deserialize,
     extract,
-    transform
+    transform,
   }
 }

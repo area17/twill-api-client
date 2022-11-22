@@ -4,7 +4,7 @@ import {
   ID,
   JsonApiRelatedResource,
   JsonApiResource,
-  NormalizedStore
+  NormalizedStore,
 } from './types'
 import { camelCaseKeys } from './utils/camel-case-keys'
 
@@ -13,7 +13,7 @@ const MAX_DEPTH = 6
 function deserializeRelationships(
   resources: JsonApiRelatedResource[],
   store: NormalizedStore,
-  depth: number
+  depth: number,
 ): Resource[] {
   return resources
     .map((resource) => deserializeRelationship(resource, store, depth))
@@ -23,7 +23,7 @@ function deserializeRelationships(
 function deserializeRelationship(
   resource: JsonApiRelatedResource,
   store: NormalizedStore,
-  depth: number
+  depth: number,
 ): Resource {
   return deserialize(resource, store, depth) as Resource
 }
@@ -31,7 +31,7 @@ function deserializeRelationship(
 export function deserialize<Type extends { type: string; id: ID }>(
   result: Type[] | Type,
   store: NormalizedStore,
-  depth = 0
+  depth = 0,
 ): Resource | Resource[] {
   if (Array.isArray(result)) {
     return result.map((result) => deserialize(result, store, depth) as Resource)
@@ -57,7 +57,7 @@ export function deserialize<Type extends { type: string; id: ID }>(
     type: serializedResource.type,
     meta: serializedResource.meta,
     id: serializedResource.id,
-    ...camelCaseKeys(serializedResource.attributes)
+    ...camelCaseKeys(serializedResource.attributes),
   }
 
   if (serializedResource.relationships) {
@@ -74,10 +74,10 @@ export function deserialize<Type extends { type: string; id: ID }>(
 
         return {
           ...acc,
-          [camelCase(key)]: relationship ?? data
+          [camelCase(key)]: relationship ?? data,
         }
       },
-      resource
+      resource,
     )
   }
 

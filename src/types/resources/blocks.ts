@@ -10,7 +10,7 @@ import {
   RelatedItemRelated,
   RelatedItemResource,
   OrNull,
-  Resource
+  Resource,
 } from '../../types'
 
 export interface JsonApiBlockResource extends JsonApiResource {
