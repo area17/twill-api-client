@@ -15,4 +15,5 @@ export default {
       '@': path.resolve(__dirname, './src'),
     },
   },
+  test: {},
 }
