@@ -1,5 +1,5 @@
-import { Resource } from '../types/resources'
-import { Editors } from '../types/transforms'
+import { Resource } from '@/types/resources'
+import { Editors } from '@/types/transforms'
 
 function editor<Type extends Resource>(
   resource: Type,

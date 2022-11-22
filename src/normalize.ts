@@ -1,5 +1,5 @@
 import { camelCase } from 'lodash-es'
-import { camelCaseKeys } from './utils/camel-case-keys'
+import { camelCaseKeys } from '@/utils/camel-case-keys'
 import {
   NormalizedResult,
   NormalizedStore,
@@ -7,7 +7,7 @@ import {
   JsonApiDataResponse,
   JsonApiResource,
   JsonApiRelatedResource,
-} from './types'
+} from '@/types'
 
 /**
  * Normalize the JSON:API response into categories by resource type

@@ -5,8 +5,8 @@ import {
   JsonApiRelatedResource,
   JsonApiResource,
   NormalizedStore,
-} from './types'
-import { camelCaseKeys } from './utils/camel-case-keys'
+} from '@/types'
+import { camelCaseKeys } from '@/utils/camel-case-keys'
 
 const MAX_DEPTH = 6
 

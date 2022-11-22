@@ -1,8 +1,8 @@
-import { Resource } from './types'
-import { blocks } from './extract/blocks'
-import { browsers } from './extract/related-items'
+import { Resource } from '@/types'
+import { blocks } from '@/extract/blocks'
+import { browsers } from '@/extract/related-items'
 // @ts-ignore
-import { images } from './extract/images'
+import { images } from '@/extract/images'
 
 export const extract = (resource: Resource) => {
   return {

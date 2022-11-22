@@ -1,4 +1,4 @@
-import { RelatedItemResource, RelatedItems, Resource, OrNull } from '../types'
+import { RelatedItemResource, RelatedItems, Resource, OrNull } from '@/types'
 
 export function browser<Type extends Resource>(
   resource: Type,

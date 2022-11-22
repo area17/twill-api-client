@@ -4,7 +4,7 @@ import {
   JsonApiRelationship,
   JsonApiResource,
   Resource,
-} from '../../types'
+} from '@/types'
 
 export interface JsonApiRelatedItemResource extends JsonApiResource {
   type: 'related-items'

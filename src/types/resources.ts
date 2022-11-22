@@ -4,7 +4,7 @@ import {
   RelatedItemResource,
   MediaResource,
   FileResource,
-} from '../types'
+} from '@/types'
 
 export interface Resource extends Record<string, unknown> {
   id: ID

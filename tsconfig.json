@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
+    "baseUrl": "./src",
     "outDir": "./dist",
+    "paths": {
+      "@/*": ["*"]
+    },
     "target": "ESNext",
     "useDefineForClassFields": true,
     "module": "ESNext",

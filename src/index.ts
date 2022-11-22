@@ -1,8 +1,8 @@
-import { QueryBuilder } from './query-builder'
-import { ID, JsonApiDataResponse, JsonApiResource, Resource } from './types'
-import { normalize } from './normalize'
-import { deserialize } from './deserialize'
-import { extract } from './extract'
+import { QueryBuilder } from '@/query-builder'
+import { ID, JsonApiDataResponse, JsonApiResource, Resource } from '@/types'
+import { normalize } from '@/normalize'
+import { deserialize } from '@/deserialize'
+import { extract } from '@/extract'
 
 export interface TwillOptions {
   url: string

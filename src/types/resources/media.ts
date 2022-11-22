@@ -4,7 +4,7 @@ import {
   JsonApiRelatedResource,
   JsonApiResource,
   Resource,
-} from '../../types'
+} from '@/types'
 
 export interface JsonApiMediaResource extends JsonApiResource {
   type: 'media'

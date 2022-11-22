@@ -1,5 +1,5 @@
-import { client } from './client'
-import { JsonApiResponse } from './types'
+import { client } from '@/client'
+import { JsonApiResponse } from '@/types'
 
 interface QueryBuilderParams {
   filter?: Record<string, unknown>

@@ -1,5 +1,4 @@
-import { Resource } from './resources'
-import { OrNull } from './utils'
+import { Resource, OrNull } from '@/types'
 
 export interface HasTransforms {
   blocks: OrNull<Editors>

@@ -11,7 +11,7 @@ import {
   RelatedItemResource,
   OrNull,
   Resource,
-} from '../../types'
+} from '@/types'
 
 export interface JsonApiBlockResource extends JsonApiResource {
   type: 'blocks'

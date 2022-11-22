@@ -1,4 +1,4 @@
-import { ID, JsonApiResource } from '../types'
+import { ID, JsonApiResource } from '@/types'
 
 export interface NormalizedResult {
   type: string
