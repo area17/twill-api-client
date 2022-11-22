@@ -2,10 +2,11 @@ import {
   JsonApiAttributes,
   JsonApiMeta,
   JsonApiRelatedResource,
-  JsonApiResource
-} from '../json-api'
+  JsonApiResource,
+  Resource
+} from '../../types'
 
-export interface FileResource extends JsonApiResource {
+export interface JsonApiFileResource extends JsonApiResource {
   type: 'files'
   attributes: FileAttributes
   meta: FileMeta
@@ -29,4 +30,9 @@ export interface FileAttributes extends JsonApiAttributes {
 export interface FileMeta extends JsonApiMeta {
   role: string
   uuid: string
+}
+
+export interface FileResource extends Resource, FileAttributes {
+  type: 'files'
+  meta: FileMeta
 }

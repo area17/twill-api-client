@@ -2,14 +2,18 @@ import {
   JsonApiAttributes,
   JsonApiRelatedResource,
   JsonApiRelationship,
-  JsonApiResource
-} from '../json-api'
-import { FileRelated } from './files'
-import { MediaRelated } from './media'
-import { RelatedItemRelated } from './related-items'
-import { OrNull } from '../utils'
+  JsonApiResource,
+  FileRelated,
+  FileResource,
+  MediaRelated,
+  MediaResource,
+  RelatedItemRelated,
+  RelatedItemResource,
+  OrNull,
+  Resource
+} from '../../types'
 
-export interface BlockResource extends JsonApiResource {
+export interface JsonApiBlockResource extends JsonApiResource {
   type: 'blocks'
   attributes: BlockAttributes<BlockContent>
   relationships: {
@@ -26,7 +30,6 @@ export interface BlockRelated extends JsonApiRelatedResource {
 
 export interface BlockAttributes<Type extends BlockContent>
   extends JsonApiAttributes {
-  type: 'blocks'
   blockType: string
   content: OrNull<Type>
   editorName: string
@@ -36,4 +39,18 @@ export interface BlockAttributes<Type extends BlockContent>
 
 export interface BlockContent {
   [key: string]: unknown
+}
+
+export interface BlockRelationships {
+  blocks: BlockResource[]
+  files: FileResource[]
+  media: MediaResource[]
+  relatedItems: RelatedItemResource[]
+}
+
+export interface BlockResource
+  extends Resource,
+    BlockAttributes<BlockContent>,
+    BlockRelationships {
+  type: 'blocks'
 }

@@ -1,10 +1,11 @@
-import { RelatedItemResource, RelatedItems, Resource } from '../types'
+import { RelatedItemResource, RelatedItems, Resource, OrNull } from '../types'
 
 export function browser<Type extends Resource>(
   resource: Type,
   browserName: string
 ): Resource[] {
-  const browsers = resource.meta?.browsers || {}
+  const browsers: OrNull<Record<string, number[]>> =
+    (resource.meta?.browsers as any) || null
   const data: RelatedItemResource[] =
     resource.relatedItems as RelatedItemResource[]
 
@@ -22,6 +23,7 @@ export function browser<Type extends Resource>(
       }
 
       return (
+        browsers !== null &&
         browsers[browserName] &&
         browsers[browserName].includes(parseInt(resource.id as string))
       )

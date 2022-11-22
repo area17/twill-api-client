@@ -7,4 +7,6 @@ export * from './types/transforms'
 export * from './types/resources'
 export * from './types/normalized-resources'
 
+export * from './types/utils'
+
 export default {}

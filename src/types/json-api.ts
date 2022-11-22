@@ -1,5 +1,3 @@
-import { OrNull } from './utils'
-
 export interface JsonApi {
   jsonapi: {
     version: string
@@ -39,7 +37,9 @@ export interface JsonApiResource {
   type: string
   id: ID
   attributes: JsonApiAttributes
-  relationships: Record<string, JsonApiRelationship<JsonApiRelatedResource>>
+  relationships: {
+    [key: string]: JsonApiRelationship<JsonApiRelatedResource>
+  }
   links?: JsonApiLinks
   meta?: JsonApiMeta
 }
@@ -50,8 +50,8 @@ export interface JsonApiAttributes {
   [key: string]: unknown
 }
 
-export interface JsonApiRelationship<Type> {
-  data: OrNull<Type> | Type[]
+export interface JsonApiRelationship<Type extends JsonApiRelatedResource> {
+  data: Type | Type[]
   meta?: Record<string, unknown>
   links?: JsonApiLinks
 }

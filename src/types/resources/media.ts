@@ -2,10 +2,11 @@ import {
   JsonApiAttributes,
   JsonApiMeta,
   JsonApiRelatedResource,
-  JsonApiResource
-} from '../json-api'
+  JsonApiResource,
+  Resource
+} from '../../types'
 
-export interface MediaResource extends JsonApiResource {
+export interface JsonApiMediaResource extends JsonApiResource {
   type: 'media'
   attributes: MediaAttributes
   meta: MediaMeta
@@ -13,7 +14,7 @@ export interface MediaResource extends JsonApiResource {
 
 export interface MediaRelated extends JsonApiRelatedResource {
   type: 'media'
-  meta: MediaMeta
+  meta?: MediaMeta
 }
 
 export interface MediaAttributes extends JsonApiAttributes {
@@ -39,4 +40,9 @@ export interface MediaMeta extends JsonApiMeta {
   role: string
   crop: string
   uuid: string
+}
+
+export interface MediaResource extends Resource, MediaAttributes {
+  type: 'media'
+  meta: MediaMeta
 }

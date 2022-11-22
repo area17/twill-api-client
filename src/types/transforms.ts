@@ -8,12 +8,6 @@ export interface HasTransforms {
   browsers: OrNull<RelatedItems>
 }
 
-// type TEditors<Type> = Type extends HasBlocks
-//   ? {
-//       blocks: OrNull<Editors>
-//     }
-//   : Type
-
 export interface Editors {
   [key: string]: Resource[]
 }
