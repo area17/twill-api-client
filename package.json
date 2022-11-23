@@ -29,7 +29,8 @@
     "build:watch": "tsc && vite build --watch",
     "preview": "vite preview",
     "test": "vitest",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "@types/lodash-es": "^4.17.6",
