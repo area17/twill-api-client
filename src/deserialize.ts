@@ -14,9 +14,12 @@ function deserializeRelationships(
   resources: JsonApiRelatedResource[],
   store: NormalizedStore,
   depth: number,
+  callback?: (resource: Resource) => void,
 ): Resource[] {
   return resources
-    .map((resource) => deserializeRelationship(resource, store, depth))
+    .map((resource) =>
+      deserializeRelationship(resource, store, depth, callback),
+    )
     .filter((resource) => !!resource)
 }
 
@@ -24,19 +27,28 @@ function deserializeRelationship(
   resource: JsonApiRelatedResource,
   store: NormalizedStore,
   depth: number,
+  callback?: (resource: Resource) => void,
 ): Resource {
-  return deserialize(resource, store, depth) as Resource
+  return deserialize(resource, store, depth, callback) as Resource
 }
 
-export function deserialize<Type extends { type: string; id: ID }>(
-  result: Type[] | Type,
+export function deserializeMany<Type extends { type: string; id: ID }>(
+  result: Type[],
   store: NormalizedStore,
   depth = 0,
-): Resource | Resource[] {
-  if (Array.isArray(result)) {
-    return result.map((result) => deserialize(result, store, depth) as Resource)
-  }
+  callback?: (resource: Resource) => void,
+): Resource[] {
+  return result.map((resource) =>
+    deserializeOne(resource, store, depth, callback),
+  )
+}
 
+export function deserializeOne<Type extends { type: string; id: ID }>(
+  result: Type,
+  store: NormalizedStore,
+  depth = 0,
+  callback?: (resource: Resource) => void,
+): Resource {
   const serializedResource: JsonApiResource =
     store[camelCase(result.type)][result.id]
 
@@ -68,8 +80,8 @@ export function deserialize<Type extends { type: string; id: ID }>(
 
         if (!isEmpty(data)) {
           relationship = Array.isArray(data)
-            ? deserializeRelationships(data, store, depth)
-            : deserializeRelationship(data, store, depth)
+            ? deserializeRelationships(data, store, depth, callback)
+            : deserializeRelationship(data, store, depth, callback)
         }
 
         return {
@@ -81,5 +93,21 @@ export function deserialize<Type extends { type: string; id: ID }>(
     )
   }
 
+  if (callback) {
+    resource = { ...resource, ...(callback(resource) as unknown as Resource) }
+  }
+
   return resource
+}
+
+export function deserialize<Type extends { type: string; id: ID }>(
+  result: Type[] | Type,
+  store: NormalizedStore,
+  depth = 0,
+  callback?: (resource: Resource) => void,
+): Resource | Resource[] {
+  if (Array.isArray(result)) {
+    return deserializeMany(result, store, depth, callback)
+  }
+  return deserializeOne(result, store, depth, callback)
 }

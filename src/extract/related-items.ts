@@ -1,4 +1,9 @@
-import { RelatedItemResource, RelatedItems, Resource, OrNull } from '@/types'
+import {
+  RelatedItemResource,
+  Resource,
+  OrNull,
+  ExtractedResource,
+} from '@/types'
 
 export function browser<Type extends Resource>(
   resource: Type,
@@ -30,8 +35,10 @@ export function browser<Type extends Resource>(
     })
 }
 
-export function browsers<Type extends Resource>(resource: Type): RelatedItems {
-  const browsers: RelatedItems = {}
+export function browsers<Type extends Resource>(
+  resource: Type,
+): ExtractedResource<Resource> {
+  const browsers: ExtractedResource<Resource> = {}
 
   if (Array.isArray(resource?.relatedItems)) {
     const browserNames: string[] = resource?.relatedItems.map(

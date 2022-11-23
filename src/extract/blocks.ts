@@ -1,10 +1,10 @@
-import { Resource } from '@/types/resources'
-import { Editors } from '@/types/transforms'
+import { BlockResource } from '@/types'
+import { ExtractedResource, Resource } from '@/types/resources'
 
 function editor<Type extends Resource>(
   resource: Type,
   editorName = 'default',
-): Resource[] {
+): BlockResource[] {
   if (resource.blocks && Array.isArray(resource.blocks)) {
     return resource.blocks
       .filter((block) => block.editorName === editorName)
@@ -13,8 +13,10 @@ function editor<Type extends Resource>(
   return []
 }
 
-function blocks<Type extends Resource>(resource: Type): Editors {
-  const editors = {} as Editors
+function blocks<Type extends Resource>(
+  resource: Type,
+): ExtractedResource<BlockResource> {
+  const editors = {} as ExtractedResource<BlockResource>
 
   if (Array.isArray(resource.blocks)) {
     const editorNames = resource?.blocks?.map((block) => block.editorName)
