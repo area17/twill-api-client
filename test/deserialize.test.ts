@@ -17,7 +17,7 @@ test('deserialize', () => {
   expect(deserialized[0].relationships).toBeTypeOf('undefined')
   expect(deserialized[0].media).toBeTypeOf('undefined')
   expect(deserialized[0].blocks).toHaveLength(3)
-  expect(deserialized[0].files).toHaveLength(1)
+  expect(deserialized[0].files).toHaveLength(2)
 
   const blocks = deserialized[0].blocks
 

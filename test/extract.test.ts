@@ -4,7 +4,7 @@ import { normalize } from '../src/normalize'
 import { deserialize } from '../src/deserialize'
 import { extract } from '../src/extract'
 
-test('extract', () => {
+test('extract files', () => {
   const normalized = normalize(pages)
   const deserialized = deserialize(normalized.result, normalized.resources)
   const extracted = extract(deserialized[0])
@@ -16,10 +16,10 @@ test('extract', () => {
   )
 
   expect(Object.keys(extracted)).toMatchInlineSnapshot(`
-    [
-      "blocks",
-      "files",
-    ]
+  [
+    "blocks",
+    "files",
+  ]
   `)
 
   expect(extracted).toMatchSnapshot()
