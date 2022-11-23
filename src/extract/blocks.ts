@@ -1,6 +1,7 @@
 import { BlockResource } from '@/types'
 import { Blockable, ExtractedResource, Resource } from '@/types/resources'
 import { unique } from '@/utils/unique'
+import { camelCase } from 'lodash-es'
 
 export function editor(
   resource: Blockable,
@@ -28,7 +29,7 @@ export function blocks(
     const editorNames = unique(resource.blocks, 'editorName') as string[]
 
     editorNames.map((editorName) => {
-      editors[editorName] = editor(resource as Blockable, editorName)
+      editors[camelCase(editorName)] = editor(resource as Blockable, editorName)
     })
   }
 
