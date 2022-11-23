@@ -6,6 +6,10 @@ export interface Resource extends Record<string, unknown> {
   meta?: Record<string, unknown>
 }
 
+export interface Fileable extends Resource {
+  files: FileResource[] | undefined
+}
+
 export interface Transformations {
   blocks?: ExtractedResource<BlockResource>
   relatedItems?: ExtractedResource<Resource>

@@ -43,6 +43,14 @@
                 "role": "video_src",
                 "uuid": "c1370512-003a-4ae3-961b-48ebecce07a6/video.mp4"
               }
+            },
+            {
+              "type": "files",
+              "id": "10",
+              "meta": {
+                "role": "video_src",
+                "uuid": "c1370512-003a-4ae3-961b-48ebecce07a6/video-alt.mp4"
+              }
             }
           ]
         },
@@ -296,6 +304,24 @@
       "meta": {
         "role": "video_src",
         "uuid": "c1370512-003a-4ae3-961b-48ebecce07a6/video.mp4"
+      }
+    },
+    {
+      "type": "files",
+      "id": "10",
+      "attributes": {
+        "createdAt": "2022-11-21T15:32:08.000000Z",
+        "updatedAt": "2022-11-21T15:32:08.000000Z",
+        "uuid": "c1370512-003a-4ae3-961b-48ebecce07a6/video-alt.mp4",
+        "filename": "video-alt.mp4",
+        "role": "video_src",
+        "size": "2.98 Mb",
+        "originalSrc": "https://twill.test/storage/uploads/c1370512-003a-4ae3-961b-48ebecce07a6/video-alt.mp4"
+      },
+      "links": { "self": "https://twill.test/api/v1/files/10" },
+      "meta": {
+        "role": "video_src",
+        "uuid": "c1370512-003a-4ae3-961b-48ebecce07a6/video-alt.mp4"
       }
     }
   ]

@@ -1,6 +1,7 @@
 import { Resource, Transformations } from '@/types'
 import { blocks } from '@/extract/blocks'
 import { browsers } from '@/extract/related-items'
+import { files } from '@/extract/files'
 // @ts-ignore
 import { images } from '@/extract/images'
 
@@ -20,7 +21,7 @@ export const extract = (resource: Resource) => {
   }
 
   if (Array.isArray(resource.files)) {
-    extracted.files = {} // not implemented yet
+    extracted.files = files(resource)
   }
 
   return extracted

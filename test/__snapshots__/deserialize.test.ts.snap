@@ -132,6 +132,21 @@ exports[`deserialize 1`] = `
         "updatedAt": "2022-11-21T15:32:08.000000Z",
         "uuid": "c1370512-003a-4ae3-961b-48ebecce07a6/video.mp4",
       },
+      {
+        "createdAt": "2022-11-21T15:32:08.000000Z",
+        "filename": "video-alt.mp4",
+        "id": "10",
+        "meta": {
+          "role": "video_src",
+          "uuid": "c1370512-003a-4ae3-961b-48ebecce07a6/video-alt.mp4",
+        },
+        "originalSrc": "https://twill.test/storage/uploads/c1370512-003a-4ae3-961b-48ebecce07a6/video-alt.mp4",
+        "role": "video_src",
+        "size": "2.98 Mb",
+        "type": "files",
+        "updatedAt": "2022-11-21T15:32:08.000000Z",
+        "uuid": "c1370512-003a-4ae3-961b-48ebecce07a6/video-alt.mp4",
+      },
     ],
     "hero": {
       "assetType": "video",
