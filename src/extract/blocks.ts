@@ -1,33 +1,36 @@
 import { BlockResource } from '@/types'
-import { ExtractedResource, Resource } from '@/types/resources'
+import { Blockable, ExtractedResource, Resource } from '@/types/resources'
+import { unique } from '@/utils/unique'
 
-function editor<Type extends Resource>(
-  resource: Type,
+export function editor(
+  resource: Blockable,
   editorName = 'default',
 ): BlockResource[] {
-  if (resource.blocks && Array.isArray(resource.blocks)) {
+  if (Array.isArray(resource.blocks)) {
     return resource.blocks
       .filter((block) => block.editorName === editorName)
       .sort((a, b) => a.position - b.position)
   }
+
   return []
 }
 
-function blocks<Type extends Resource>(
-  resource: Type,
+export function blocks(
+  resource: Resource | Blockable,
 ): ExtractedResource<BlockResource> {
+  if (!resource.blocks) {
+    return {}
+  }
+
   const editors = {} as ExtractedResource<BlockResource>
 
   if (Array.isArray(resource.blocks)) {
-    const editorNames = resource?.blocks?.map((block) => block.editorName)
-    const uniqueEditorNames = [...new Set(editorNames)]
+    const editorNames = unique(resource.blocks, 'editorName') as string[]
 
-    uniqueEditorNames.map((editorName) => {
-      editors[editorName] = editor(resource, editorName)
+    editorNames.map((editorName) => {
+      editors[editorName] = editor(resource as Blockable, editorName)
     })
   }
 
   return editors
 }
-
-export { blocks, editor }

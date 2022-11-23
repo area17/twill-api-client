@@ -1,5 +1,6 @@
 import { ExtractedResource, Mediable, MediaResource, Resource } from '@/types'
 import { unique } from '@/utils/unique'
+import { camelCaseKeys } from '@/utils/camel-case-keys'
 
 export function media(
   resource: Resource | Mediable,
@@ -18,7 +19,9 @@ export function media(
     images[role as string] = mediaByRole(resource as Mediable, role)
   })
 
-  return images
+  return camelCaseKeys(images) as ExtractedResource<
+    Array<Record<string, MediaResource>>
+  >
 }
 
 export function mediaByRole(

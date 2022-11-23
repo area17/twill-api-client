@@ -64,18 +64,14 @@ export const Twill = (options: TwillOptions) => {
     return new QueryBuilder({ path, headers })
   }
 
-  const transform = (response: JsonApiDataResponse) => {
+  const transform = (response: JsonApiDataResponse): Resource[] => {
     const normalized = normalize(response)
-    const resources: Resource[] = deserialize(
+    return deserialize(
       normalized.result,
       normalized.resources,
+      0,
+      extract,
     ) as Resource[]
-    return resources.map((resource: Resource) => {
-      return {
-        ...resource,
-        ...extract(resource),
-      }
-    })
   }
 
   return {
