@@ -1,6 +1,6 @@
 import { Resource, Transformations } from '@/types'
 import { blocks } from '@/extract/blocks'
-import { browsers } from '@/extract/related-items'
+import { relatedItems } from '@/extract/related-items'
 import { files } from '@/extract/files'
 import { media } from '@/extract/media'
 
@@ -16,7 +16,7 @@ export const extract = (resource: Resource) => {
   }
 
   if (Array.isArray(resource.relatedItems)) {
-    extracted.relatedItems = browsers(resource)
+    extracted.relatedItems = relatedItems(resource)
   }
 
   if (Array.isArray(resource.files)) {

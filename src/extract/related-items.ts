@@ -3,10 +3,12 @@ import {
   Resource,
   OrNull,
   ExtractedResource,
+  RelatedItemable,
 } from '@/types'
+import { unique } from '@/utils/unique'
 
-export function browser<Type extends Resource>(
-  resource: Type,
+export function browser(
+  resource: RelatedItemable,
   browserName: string,
 ): Resource[] {
   const browsers: OrNull<Record<string, number[]>> =
@@ -35,19 +37,23 @@ export function browser<Type extends Resource>(
     })
 }
 
-export function browsers<Type extends Resource>(
-  resource: Type,
+export function relatedItems(
+  resource: Resource | RelatedItemable,
 ): ExtractedResource<Resource> {
+  if (!resource.relatedItems) {
+    return {}
+  }
+
   const browsers: ExtractedResource<Resource> = {}
 
   if (Array.isArray(resource?.relatedItems)) {
-    const browserNames: string[] = resource?.relatedItems.map(
-      (relatedItem: Resource) => relatedItem.browserName as string,
-    )
-    const uniqueBrowserNames = [...new Set(browserNames)]
+    const browserNames: string[] = unique(
+      resource.relatedItems,
+      'browserName',
+    ) as string[]
 
-    uniqueBrowserNames.map((browserName) => {
-      browsers[browserName] = browser(resource, browserName)
+    browserNames.map((browserName) => {
+      browsers[browserName] = browser(resource as RelatedItemable, browserName)
     })
   }
 
