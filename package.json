@@ -1,7 +1,12 @@
 {
   "name": "@area17/twill-api-client",
-  "private": true,
   "version": "0.0.0",
+  "description": "Client for Twill's JSON:API in TypeScript",
+  "bugs": {
+    "url": "https://github.com/area17/twill-api-client/issues"
+  },
+  "homepage": "https://github.com/area17/twill-api-client#readme",
+  "private": false,
   "type": "module",
   "files": [
     "dist"
@@ -13,6 +18,10 @@
       "import": "./dist/twill.js",
       "require": "./dist/twill.umd.cjs"
     }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/area17/twill-api-client.git"
   },
   "scripts": {
     "dev": "vite",
