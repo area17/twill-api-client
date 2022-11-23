@@ -31,10 +31,10 @@ export interface Mediable extends Resource {
 export interface Transformations {
   blocks?: ExtractedResource<BlockResource>
   relatedItems?: ExtractedResource<Resource>
-  media?: ExtractedResource<MediaResource>
+  media?: ExtractedResource<Array<Record<string, MediaResource>>>
   files?: ExtractedResource<FileResource>
 }
 
-export interface ExtractedResource<Type extends Resource> {
-  [key: string]: Type[]
+export interface ExtractedResource<Type> {
+  [key: string]: Type | Type[]
 }
