@@ -1,6 +1,6 @@
 {
   "name": "@area17/twill-api-client",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Client for Twill's JSON:API in TypeScript",
   "bugs": {
     "url": "https://github.com/area17/twill-api-client/issues"
