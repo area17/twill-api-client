@@ -2,8 +2,7 @@ import { Resource, Transformations } from '@/types'
 import { blocks } from '@/extract/blocks'
 import { browsers } from '@/extract/related-items'
 import { files } from '@/extract/files'
-// @ts-ignore
-import { images } from '@/extract/images'
+import { media } from '@/extract/media'
 
 export const extract = (resource: Resource) => {
   const extracted: Transformations = {}
@@ -13,7 +12,7 @@ export const extract = (resource: Resource) => {
   }
 
   if (Array.isArray(resource.media)) {
-    extracted.media = images(resource)
+    extracted.media = media(resource)
   }
 
   if (Array.isArray(resource.relatedItems)) {

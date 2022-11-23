@@ -1,5 +1,6 @@
 import { ExtractedResource, Fileable, FileResource, Resource } from '@/types'
 import { camelCaseKeys } from '@/utils/camel-case-keys'
+import { unique } from '@/utils/unique'
 
 export function filesByRole<Type extends Fileable>(
   resource: Type,
@@ -27,7 +28,9 @@ export function files(
     return {}
   }
 
-  const roles: string[] = fileRoles(resource as Fileable)
+  const roles: string[] = Array.isArray(resource.files)
+    ? (unique(resource.files, 'meta.role') as string[])
+    : []
 
   const files: ExtractedResource<FileResource> = {}
 
@@ -36,16 +39,4 @@ export function files(
   })
 
   return camelCaseKeys(files) as ExtractedResource<FileResource>
-}
-
-export function fileRoles<Type extends Fileable>(resource: Type): string[] {
-  const roles: string[] = []
-
-  if (Array.isArray(resource.files)) {
-    resource.files.map((file: FileResource) => {
-      roles.push(file.meta.role)
-    })
-  }
-
-  return [...new Set(roles)]
 }
