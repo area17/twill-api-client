@@ -4,6 +4,8 @@ import { normalize } from '@/normalize'
 import { deserialize } from '@/deserialize'
 import { extract } from '@/extract'
 
+export * from '@/types'
+
 export interface TwillOptions {
   url: string
   token: string
