@@ -6,6 +6,7 @@ import {
   RelatedItemable,
 } from '@/types'
 import { unique } from '@/utils/unique'
+import { camelCase } from 'lodash-es'
 
 export function browser(
   resource: RelatedItemable,
@@ -53,7 +54,10 @@ export function relatedItems(
     ) as string[]
 
     browserNames.map((browserName) => {
-      browsers[browserName] = browser(resource as RelatedItemable, browserName)
+      browsers[camelCase(browserName)] = browser(
+        resource as RelatedItemable,
+        browserName,
+      )
     })
   }
 
