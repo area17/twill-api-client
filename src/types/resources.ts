@@ -1,4 +1,10 @@
-import { ID, BlockResource, MediaResource, FileResource } from '@/types'
+import {
+  ID,
+  BlockResource,
+  MediaResource,
+  FileResource,
+  RelatedItemResource,
+} from '@/types'
 
 export interface Resource extends Record<string, unknown> {
   id: ID
@@ -8,6 +14,18 @@ export interface Resource extends Record<string, unknown> {
 
 export interface Fileable extends Resource {
   files: FileResource[] | undefined
+}
+
+export interface Blockable extends Resource {
+  blocks: BlockResource[] | undefined
+}
+
+export interface RelatedItemable extends Resource {
+  relatedItems: RelatedItemResource[] | undefined
+}
+
+export interface Mediable extends Resource {
+  media: MediaResource[] | undefined
 }
 
 export interface Transformations {
