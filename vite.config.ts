@@ -1,4 +1,4 @@
-import path from 'path'
+import {resolve} from 'path'
 import dts from 'vite-plugin-dts'
 
 export default {
@@ -12,7 +12,7 @@ export default {
   plugins: [dts()],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'),
+      '@': resolve(__dirname, './src'),
     },
   },
   test: {},
