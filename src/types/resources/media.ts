@@ -33,7 +33,7 @@ export interface MediaAttributes extends JsonApiAttributes {
   alt: string
   caption: string
   video: string
-  metadata: Object
+  metadata: Record<string, unknown>
 }
 
 export interface MediaMeta extends JsonApiMeta {
