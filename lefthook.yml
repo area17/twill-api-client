@@ -14,4 +14,10 @@
      eslint:
        glob: "*.{js,ts,jsx,tsx}"
        run: node_modules/.bin/eslint --ignore-path .gitignore --fix {staged_files}
+     typecheck:
+       glob: "*.{js,ts,jsx,tsx}"
+       run: node_modules/.bin/tsc
+     package:
+       glob: "**/package.json"
+       run: node_modules/.bin/sort-package-json
 
