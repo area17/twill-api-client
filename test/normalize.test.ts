@@ -1,9 +1,10 @@
 import { expect, test } from 'vitest'
 import pages from './data/pages.json'
 import { normalize } from '../src/normalize'
+import {JsonApiDataResponse } from "../src";
 
 test('normalize', () => {
-  const normalized = normalize(pages)
+  const normalized = normalize(pages as unknown as JsonApiDataResponse)
 
   expect(normalized).toMatchSnapshot()
 

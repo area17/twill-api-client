@@ -1,56 +1,59 @@
 {
   "name": "@area17/twill-api-client",
   "version": "0.0.12",
+  "private": false,
   "description": "Client for Twill's JSON:API in TypeScript",
+  "homepage": "https://github.com/area17/twill-api-client#readme",
   "bugs": {
     "url": "https://github.com/area17/twill-api-client/issues"
   },
-  "homepage": "https://github.com/area17/twill-api-client#readme",
-  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/area17/twill-api-client.git"
+  },
   "type": "module",
-  "files": [
-    "dist"
-  ],
-  "main": "./dist/twill.umd.cjs",
-  "module": "./dist/twill.js",
-  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/twill.js",
       "require": "./dist/twill.umd.cjs"
     }
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/area17/twill-api-client.git"
-  },
+  "main": "./dist/twill.umd.cjs",
+  "module": "./dist/twill.js",
+  "files": [
+    "dist"
+  ],
+  "types": "./dist/index.d.ts",
   "scripts": {
-    "dev": "vite",
     "build": "tsc && vite build",
     "build:watch": "tsc && vite build --watch",
-    "preview": "vite preview",
-    "test": "vitest",
     "coverage": "vitest run --coverage",
-    "prepublishOnly": "npm run build"
-  },
-  "devDependencies": {
-    "@types/lodash-es": "^4.17.6",
-    "@types/qs": "^6.9.7",
-    "@typescript-eslint/eslint-plugin": "^5.44.0",
-    "@typescript-eslint/parser": "^5.44.0",
-    "eslint": "^8.27.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-import-resolver-typescript": "^3.5.2",
-    "eslint-plugin-import": "^2.26.0",
-    "prettier": "^2.7.1",
-    "typescript": "^4.6.4",
-    "vite": "^3.2.3",
-    "vite-plugin-dts": "^1.7.1",
-    "vitest": "^0.25.3"
+    "dev": "vite",
+    "lint": "eslint --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --ignore-path .gitignore . && npm run type-check",
+    "prepublishOnly": "npm run build",
+    "preview": "vite preview",
+    "test": "vitest"
   },
   "dependencies": {
-    "lodash-es": "^4.17.21",
-    "ofetch": "^1.0.0",
-    "qs": "^6.11.0"
+    "lodash-es": "~4.17.21",
+    "ofetch": "~1.0.0",
+    "qs": "~6.11.0"
+  },
+  "devDependencies": {
+    "@types/lodash-es": "~4.17.6",
+    "@types/qs": "~6.9.7",
+    "@typescript-eslint/eslint-plugin": "~5.44.0",
+    "@typescript-eslint/parser": "~5.44.0",
+    "eslint": "~8.27.0",
+    "eslint-config-prettier": "~8.5.0",
+    "eslint-import-resolver-typescript": "~3.5.2",
+    "eslint-plugin-import": "~2.26.0",
+    "lefthook": "^1.2.2",
+    "prettier": "~2.7.1",
+    "sort-package-json": "~2.1.0",
+    "typescript": "~4.9.3",
+    "vite": "~3.2.3",
+    "vite-plugin-dts": "~1.7.1",
+    "vitest": "~0.25.3"
   }
 }
