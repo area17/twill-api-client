@@ -1,6 +1,6 @@
 {
   "name": "@area17/twill-api-client",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "private": false,
   "description": "Client for Twill's JSON:API in TypeScript",
   "homepage": "https://github.com/area17/twill-api-client#readme",
