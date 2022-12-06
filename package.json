@@ -13,6 +13,7 @@
   ],
   "main": "./dist/twill.umd.cjs",
   "module": "./dist/twill.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/twill.js",
