@@ -66,31 +66,31 @@ export function deserializeOne<Type extends { type: string; id: ID }>(
   }
 
   let resource: Resource = {
-    type: serializedResource.type,
-    meta: serializedResource.meta,
-    id: serializedResource.id,
-    ...camelCaseKeys(serializedResource.attributes),
+    ...serializedResource,
+    attributes: camelCaseKeys(serializedResource.attributes),
   }
 
   if (serializedResource.relationships) {
-    resource = Object.keys(serializedResource.relationships).reduce(
-      (acc, key) => {
-        const data = serializedResource.relationships[key].data
-        let relationship
+    resource.relationships = Object.keys(
+      serializedResource.relationships,
+    ).reduce((acc, key) => {
+      const relationship = serializedResource.relationships[key]
+      let data
 
-        if (!isEmpty(data)) {
-          relationship = Array.isArray(data)
-            ? deserializeRelationships(data, store, depth, callback)
-            : deserializeRelationship(data, store, depth, callback)
-        }
+      if (!isEmpty(relationship.data)) {
+        data = Array.isArray(relationship.data)
+          ? deserializeRelationships(relationship.data, store, depth, callback)
+          : deserializeRelationship(relationship.data, store, depth, callback)
+      }
 
-        return {
-          ...acc,
-          [camelCase(key)]: relationship ?? data,
-        }
-      },
-      resource,
-    )
+      return {
+        ...acc,
+        [camelCase(key)]: {
+          ...relationship,
+          data,
+        },
+      }
+    }, {})
   }
 
   if (callback) {
