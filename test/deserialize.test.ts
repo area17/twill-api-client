@@ -12,17 +12,24 @@ test('deserialize', () => {
   expect(Array.isArray(deserialized)).toBe(true)
   expect(deserialized.length).toBe(1)
 
-  expect(deserialized[0].slug).toBe('page-slug')
-  expect(deserialized[0].attributes).toBeTypeOf('undefined')
-  expect(deserialized[0].relationships).toBeTypeOf('undefined')
-  expect(deserialized[0].media).toBeTypeOf('undefined')
-  expect(deserialized[0].blocks).toHaveLength(3)
-  expect(deserialized[0].files).toHaveLength(2)
+  expect(deserialized[0].attributes).toBeTypeOf('object')
+  expect(deserialized[0].attributes.slug).toBe('page-slug')
+  expect(deserialized[0].relationships).toBeTypeOf('object')
+  expect(deserialized[0].relationships.media.data).toBeTypeOf('undefined')
+  expect(deserialized[0].relationships.media.links).toBeTypeOf('object')
+  expect(deserialized[0].relationships.blocks.data).toHaveLength(3)
+  expect(deserialized[0].relationships.blocks.links).toBeTypeOf('object')
+  expect(deserialized[0].relationships.files.data).toHaveLength(2)
 
-  const blocks = deserialized[0].blocks
+  const blocks = deserialized[0].relationships.blocks
 
-  expect(blocks[0].blockType).toBe('interactive')
-  expect(blocks[0].meta.browsers.interactive).toContain(1)
-  expect(blocks[0].relatedItems[0].browserName === 'interactive').toBeTruthy()
-  expect(blocks[0].relatedItems[0].related).toBeTypeOf('object')
+  expect(blocks.data[0].attributes.blockType).toBe('interactive')
+  expect(blocks.data[0].meta.browsers.interactive).toContain(1)
+  expect(
+    blocks.data[0].relationships.relatedItems.data[0].attributes.browserName ===
+      'interactive',
+  ).toBeTruthy()
+  expect(
+    blocks.data[0].relationships.relatedItems.data[0].relationships.related,
+  ).toBeTypeOf('object')
 })

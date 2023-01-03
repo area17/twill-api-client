@@ -3,162 +3,342 @@
 exports[`deserialize 1`] = `
 [
   {
-    "blocks": [
-      {
-        "blockType": "interactive",
-        "blocks": undefined,
-        "childKey": null,
-        "content": {
-          "colorTheme": "none",
-        },
-        "editorName": "default",
-        "files": [],
-        "id": "1",
-        "media": [],
-        "meta": {
-          "browsers": {
-            "interactive": [
-              1,
-            ],
-          },
-        },
-        "position": 1,
-        "relatedItems": [
-          {
-            "browserName": "interactive",
-            "id": "1",
-            "meta": undefined,
-            "position": 1,
-            "related": {
-              "blocks": undefined,
-              "createdAt": "2022-08-08T22:22:24.000000Z",
-              "displayTitle": "Interactive module",
-              "files": undefined,
-              "id": "1",
-              "media": undefined,
-              "meta": undefined,
-              "published": true,
-              "title": "Interactive module",
-              "type": "interactives",
-              "updatedAt": "2022-08-08T22:25:12.000000Z",
-            },
-            "type": "related-items",
-          },
-        ],
-        "type": "blocks",
+    "attributes": {
+      "colorTheme": "light-gray",
+      "description": "Ipsum sunt culpa occaecat Lorem aute proident eu aliquip id. Qui aute consequat et sit irure velit magna. Cupidatat tempor commodo qui aute adipisicing adipisicing tempor commodo occaecat laborum irure deserunt. Ullamco quis enim et amet ex fugiat exercitation.",
+      "hero": {
+        "assetType": "video",
+        "blendMode": "default",
       },
-      {
-        "blockType": "text",
-        "blocks": undefined,
-        "childKey": null,
-        "content": {
-          "colorTheme": "dark-gray",
-          "text": "<p>Incididunt qui duis elit ut et proident esse ullamco id dolor. Id esse fugiat est consectetur excepteur proident ex ullamco anim. Incididunt aliquip consequat labore ipsum esse. Officia irure consequat quis non labore eiusmod esse ea mollit eiusmod occaecat do culpa.</p>",
-        },
-        "editorName": "default",
-        "files": [],
-        "id": "2",
-        "media": [],
-        "meta": {
-          "browsers": null,
-        },
-        "position": 2,
-        "relatedItems": [],
-        "type": "blocks",
-      },
-      {
-        "blockType": "images",
-        "blocks": undefined,
-        "childKey": null,
-        "content": {
-          "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam morbi lectus nunc, nam tellus sed porttitor nunc. Urna neque purus eget id ut eu aenean feugiat diam.",
-          "colorTheme": "dark-gray",
-          "display": "image-right",
-          "title": "Images",
-        },
-        "editorName": "default",
-        "files": [],
-        "id": "3",
-        "media": [
-          {
-            "alt": "test-image",
-            "caption": "",
-            "createdAt": "2022-11-21T15:32:08.000000Z",
-            "crop": "default",
-            "filename": "test-image.png",
-            "height": 1486,
-            "id": "1",
-            "lqip": null,
-            "meta": {
-              "crop": "default",
-              "role": "images",
-              "uuid": "f2bdab3c-2e04-4318-b0eb-7d86b71aa1ec/test-image.png",
-            },
-            "metadata": [],
-            "originalSrc": "https://twill.test/storage/uploads/f2bdab3c-2e04-4318-b0eb-7d86b71aa1ec/test-image.png",
-            "ratio": "default",
-            "role": "images",
-            "src": "https://twill.test/img/f2bdab3c-2e04-4318-b0eb-7d86b71aa1ec/test-image.png?fm=jpg&q=80&fit=max&crop=1485%2C1486%2C46%2C0",
-            "type": "media",
-            "updatedAt": "2022-11-21T15:32:08.000000Z",
-            "uuid": "f2bdab3c-2e04-4318-b0eb-7d86b71aa1ec/test-image.png",
-            "video": "",
-            "width": 1485,
-          },
-        ],
-        "meta": {
-          "browsers": null,
-        },
-        "position": 3,
-        "relatedItems": [],
-        "type": "blocks",
-      },
-    ],
-    "colorTheme": "light-gray",
-    "description": "Ipsum sunt culpa occaecat Lorem aute proident eu aliquip id. Qui aute consequat et sit irure velit magna. Cupidatat tempor commodo qui aute adipisicing adipisicing tempor commodo occaecat laborum irure deserunt. Ullamco quis enim et amet ex fugiat exercitation.",
-    "files": [
-      {
-        "createdAt": "2022-11-21T15:32:08.000000Z",
-        "filename": "video.mp4",
-        "id": "9",
-        "meta": {
-          "role": "video_src",
-          "uuid": "c1370512-003a-4ae3-961b-48ebecce07a6/video.mp4",
-        },
-        "originalSrc": "https://twill.test/storage/uploads/c1370512-003a-4ae3-961b-48ebecce07a6/video.mp4",
-        "role": "video_src",
-        "size": "2.98 Mb",
-        "type": "files",
-        "updatedAt": "2022-11-21T15:32:08.000000Z",
-        "uuid": "c1370512-003a-4ae3-961b-48ebecce07a6/video.mp4",
-      },
-      {
-        "createdAt": "2022-11-21T15:32:08.000000Z",
-        "filename": "video-alt.mp4",
-        "id": "10",
-        "meta": {
-          "role": "video_src",
-          "uuid": "c1370512-003a-4ae3-961b-48ebecce07a6/video-alt.mp4",
-        },
-        "originalSrc": "https://twill.test/storage/uploads/c1370512-003a-4ae3-961b-48ebecce07a6/video-alt.mp4",
-        "role": "video_src",
-        "size": "2.98 Mb",
-        "type": "files",
-        "updatedAt": "2022-11-21T15:32:08.000000Z",
-        "uuid": "c1370512-003a-4ae3-961b-48ebecce07a6/video-alt.mp4",
-      },
-    ],
-    "hero": {
-      "assetType": "video",
-      "blendMode": "default",
+      "published": true,
+      "slug": "page-slug",
+      "title": "Lorem ipsum dolor sit amet",
     },
     "id": "1",
-    "media": undefined,
+    "links": {
+      "self": "https://twill.test/api/v1/pages/1",
+    },
     "meta": undefined,
-    "pies": undefined,
-    "published": true,
-    "slug": "page-slug",
-    "title": "Lorem ipsum dolor sit amet",
+    "relationships": {
+      "blocks": {
+        "data": [
+          {
+            "attributes": {
+              "blockType": "interactive",
+              "childKey": null,
+              "content": {
+                "colorTheme": "none",
+              },
+              "editorName": "default",
+              "position": 1,
+            },
+            "id": "1",
+            "links": {
+              "self": "https://twill.test/api/v1/blocks/1",
+            },
+            "meta": {
+              "browsers": {
+                "interactive": [
+                  1,
+                ],
+              },
+            },
+            "relationships": {
+              "blocks": {
+                "data": undefined,
+                "links": {
+                  "related": "https://twill.test/api/v1/blocks/1/blocks",
+                  "self": "https://twill.test/api/v1/blocks/1/relationships/blocks",
+                },
+              },
+              "files": {
+                "data": undefined,
+                "links": {
+                  "related": "https://twill.test/api/v1/blocks/1/files",
+                  "self": "https://twill.test/api/v1/blocks/1/relationships/files",
+                },
+              },
+              "media": {
+                "data": undefined,
+                "links": {
+                  "related": "https://twill.test/api/v1/blocks/1/media",
+                  "self": "https://twill.test/api/v1/blocks/1/relationships/media",
+                },
+              },
+              "relatedItems": {
+                "data": [
+                  {
+                    "attributes": {
+                      "browserName": "interactive",
+                      "position": 1,
+                    },
+                    "id": "1",
+                    "links": {
+                      "self": "https://twill.test/api/v1/related-items/3692",
+                    },
+                    "meta": undefined,
+                    "relationships": {
+                      "related": {
+                        "data": {
+                          "attributes": {
+                            "createdAt": "2022-08-08T22:22:24.000000Z",
+                            "displayTitle": "Interactive module",
+                            "published": true,
+                            "title": "Interactive module",
+                            "updatedAt": "2022-08-08T22:25:12.000000Z",
+                          },
+                          "id": "1",
+                          "links": {
+                            "self": "https://twill.test/api/v1/interactives/1",
+                          },
+                          "meta": undefined,
+                          "relationships": {
+                            "blocks": {
+                              "data": undefined,
+                              "links": {
+                                "related": "https://twill.test/api/v1/interactives/1/blocks",
+                                "self": "https://twill.test/api/v1/interactives/1/relationships/blocks",
+                              },
+                            },
+                            "files": {
+                              "data": undefined,
+                              "links": {
+                                "related": "https://twill.test/api/v1/interactives/1/files",
+                                "self": "https://twill.test/api/v1/interactives/1/relationships/files",
+                              },
+                            },
+                            "media": {
+                              "data": undefined,
+                              "links": {
+                                "related": "https://twill.test/api/v1/interactives/1/media",
+                                "self": "https://twill.test/api/v1/interactives/1/relationships/media",
+                              },
+                            },
+                          },
+                          "type": "interactives",
+                        },
+                        "links": {
+                          "related": "https://twill.test/api/v1/related-items/1/related",
+                          "self": "https://twill.test/api/v1/related-items/1/relationships/related",
+                        },
+                      },
+                    },
+                    "type": "related-items",
+                  },
+                ],
+                "links": {
+                  "related": "https://twill.test/api/v1/blocks/1/related-items",
+                  "self": "https://twill.test/api/v1/blocks/1/relationships/related-items",
+                },
+              },
+            },
+            "type": "blocks",
+          },
+          {
+            "attributes": {
+              "blockType": "text",
+              "childKey": null,
+              "content": {
+                "colorTheme": "dark-gray",
+                "text": "<p>Incididunt qui duis elit ut et proident esse ullamco id dolor. Id esse fugiat est consectetur excepteur proident ex ullamco anim. Incididunt aliquip consequat labore ipsum esse. Officia irure consequat quis non labore eiusmod esse ea mollit eiusmod occaecat do culpa.</p>",
+              },
+              "editorName": "default",
+              "position": 2,
+            },
+            "id": "2",
+            "links": {
+              "self": "https://twill.test/api/v1/blocks/2",
+            },
+            "meta": {
+              "browsers": null,
+            },
+            "relationships": {
+              "blocks": {
+                "data": undefined,
+                "links": {
+                  "related": "https://twill.test/api/v1/blocks/2/blocks",
+                  "self": "https://twill.test/api/v1/blocks/2/relationships/blocks",
+                },
+              },
+              "files": {
+                "data": undefined,
+                "links": {
+                  "related": "https://twill.test/api/v1/blocks/2/files",
+                  "self": "https://twill.test/api/v1/blocks/2/relationships/files",
+                },
+              },
+              "media": {
+                "data": undefined,
+                "links": {
+                  "related": "https://twill.test/api/v1/blocks/2/media",
+                  "self": "https://twill.test/api/v1/blocks/2/relationships/media",
+                },
+              },
+              "relatedItems": {
+                "data": undefined,
+                "links": {
+                  "related": "https://twill.test/api/v1/blocks/2/related-items",
+                  "self": "https://twill.test/api/v1/blocks/2/relationships/related-items",
+                },
+              },
+            },
+            "type": "blocks",
+          },
+          {
+            "attributes": {
+              "blockType": "images",
+              "childKey": null,
+              "content": {
+                "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam morbi lectus nunc, nam tellus sed porttitor nunc. Urna neque purus eget id ut eu aenean feugiat diam.",
+                "colorTheme": "dark-gray",
+                "display": "image-right",
+                "title": "Images",
+              },
+              "editorName": "default",
+              "position": 3,
+            },
+            "id": "3",
+            "links": {
+              "self": "https://twill.test/api/v1/blocks/3",
+            },
+            "meta": {
+              "browsers": null,
+            },
+            "relationships": {
+              "blocks": {
+                "data": undefined,
+                "links": {
+                  "related": "https://twill.test/api/v1/blocks/3/blocks",
+                  "self": "https://twill.test/api/v1/blocks/3/relationships/blocks",
+                },
+              },
+              "files": {
+                "data": undefined,
+                "links": {
+                  "related": "https://twill.test/api/v1/blocks/3/files",
+                  "self": "https://twill.test/api/v1/blocks/3/relationships/files",
+                },
+              },
+              "media": {
+                "data": [
+                  {
+                    "attributes": {
+                      "alt": "test-image",
+                      "caption": "",
+                      "createdAt": "2022-11-21T15:32:08.000000Z",
+                      "crop": "default",
+                      "filename": "test-image.png",
+                      "height": 1486,
+                      "lqip": null,
+                      "metadata": [],
+                      "originalSrc": "https://twill.test/storage/uploads/f2bdab3c-2e04-4318-b0eb-7d86b71aa1ec/test-image.png",
+                      "ratio": "default",
+                      "role": "images",
+                      "src": "https://twill.test/img/f2bdab3c-2e04-4318-b0eb-7d86b71aa1ec/test-image.png?fm=jpg&q=80&fit=max&crop=1485%2C1486%2C46%2C0",
+                      "updatedAt": "2022-11-21T15:32:08.000000Z",
+                      "uuid": "f2bdab3c-2e04-4318-b0eb-7d86b71aa1ec/test-image.png",
+                      "video": "",
+                      "width": 1485,
+                    },
+                    "id": "1",
+                    "links": {
+                      "self": "https://twill.test/api/v1/media/1",
+                    },
+                    "meta": {
+                      "crop": "default",
+                      "role": "images",
+                      "uuid": "f2bdab3c-2e04-4318-b0eb-7d86b71aa1ec/test-image.png",
+                    },
+                    "relationships": {},
+                    "type": "media",
+                  },
+                ],
+                "links": {
+                  "related": "https://twill.test/api/v1/blocks/3/media",
+                  "self": "https://twill.test/api/v1/blocks/3/relationships/media",
+                },
+              },
+              "relatedItems": {
+                "data": undefined,
+                "links": {
+                  "related": "https://twill.test/api/v1/blocks/3/related-items",
+                  "self": "https://twill.test/api/v1/blocks/3/relationships/related-items",
+                },
+              },
+            },
+            "type": "blocks",
+          },
+        ],
+        "links": {
+          "related": "https://twill.test/api/v1/pages/1/blocks",
+          "self": "https://twill.test/api/v1/pages/1/relationships/blocks",
+        },
+      },
+      "files": {
+        "data": [
+          {
+            "attributes": {
+              "createdAt": "2022-11-21T15:32:08.000000Z",
+              "filename": "video.mp4",
+              "originalSrc": "https://twill.test/storage/uploads/c1370512-003a-4ae3-961b-48ebecce07a6/video.mp4",
+              "role": "video_src",
+              "size": "2.98 Mb",
+              "updatedAt": "2022-11-21T15:32:08.000000Z",
+              "uuid": "c1370512-003a-4ae3-961b-48ebecce07a6/video.mp4",
+            },
+            "id": "9",
+            "links": {
+              "self": "https://twill.test/api/v1/files/9",
+            },
+            "meta": {
+              "role": "video_src",
+              "uuid": "c1370512-003a-4ae3-961b-48ebecce07a6/video.mp4",
+            },
+            "relationships": {},
+            "type": "files",
+          },
+          {
+            "attributes": {
+              "createdAt": "2022-11-21T15:32:08.000000Z",
+              "filename": "video-alt.mp4",
+              "originalSrc": "https://twill.test/storage/uploads/c1370512-003a-4ae3-961b-48ebecce07a6/video-alt.mp4",
+              "role": "video_src",
+              "size": "2.98 Mb",
+              "updatedAt": "2022-11-21T15:32:08.000000Z",
+              "uuid": "c1370512-003a-4ae3-961b-48ebecce07a6/video-alt.mp4",
+            },
+            "id": "10",
+            "links": {
+              "self": "https://twill.test/api/v1/files/10",
+            },
+            "meta": {
+              "role": "video_src",
+              "uuid": "c1370512-003a-4ae3-961b-48ebecce07a6/video-alt.mp4",
+            },
+            "relationships": {},
+            "type": "files",
+          },
+        ],
+        "links": {
+          "related": "https://twill.test/api/v1/pages/1/files",
+          "self": "https://twill.test/api/v1/pages/1/relationships/files",
+        },
+      },
+      "media": {
+        "data": undefined,
+        "links": {
+          "related": "https://twill.test/api/v1/pages/1/media",
+          "self": "https://twill.test/api/v1/pages/1/relationships/media",
+        },
+      },
+      "pies": {
+        "data": undefined,
+        "links": {
+          "related": "https://twill.test/api/v1/pages/1/pies",
+          "self": "https://twill.test/api/v1/pages/1/relationships/pies",
+        },
+      },
+    },
     "type": "pages",
   },
 ]
