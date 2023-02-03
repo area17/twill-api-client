@@ -20,10 +20,10 @@
   },
   "main": "./dist/twill.umd.cjs",
   "module": "./dist/twill.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
-  "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsc && vite build",
     "build:watch": "tsc && vite build --watch",
