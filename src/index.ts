@@ -8,18 +8,25 @@ export * from '@/types'
 
 export interface TwillOptions {
   url: string
-  token: string
+  token?: string
   prefix: string
   version: string
+}
+
+export interface Headers {
+  [key: string]: string
 }
 
 export const Twill = (options: TwillOptions) => {
   const { url, prefix, version, token } = options
   const baseURL = `${url}${prefix}/${version}`
 
-  const headers = {
-    Authorization: `Bearer ${token}`,
+  const headers: Headers = {
     Accept: 'application/vnd.api+json',
+  }
+
+  if (token) {
+    headers.Authorization = `Bearer ${token}`
   }
 
   const get = (path: string): QueryBuilder => {
