@@ -8,7 +8,7 @@ import {
 } from '@/types'
 import { camelCaseKeys } from '@/utils/camel-case-keys'
 
-const MAX_DEPTH = 6
+const MAX_DEPTH = 10
 
 function deserializeRelationships(
   resources: JsonApiRelatedResource[],
