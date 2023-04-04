@@ -6,7 +6,7 @@ export interface JsonApi {
 }
 
 export interface JsonApiDataResponse extends JsonApi {
-  links: JsonApiLinks
+  links?: JsonApiLinks
   data: JsonApiResource | JsonApiResource[]
   included?: JsonApiResource[]
   meta?: {
