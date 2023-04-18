@@ -40,7 +40,7 @@ export const Twill = (options: TwillOptions) => {
       headers,
     })
 
-  const findOne = (resource: string, id: ID | number | number) =>
+  const findOne = (resource: string, id: ID | number) =>
     new QueryBuilder({
       path: `${resource}/${id}`,
       baseURL,
@@ -79,7 +79,6 @@ export const Twill = (options: TwillOptions) => {
       normalized.result,
       normalized.resources,
       0,
-      extract,
     ) as Resource[]
   }
 

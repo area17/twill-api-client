@@ -14,11 +14,10 @@ function deserializeRelationships(
   resources: JsonApiRelatedResource[],
   store: NormalizedStore,
   depth: number,
-  callback?: (resource: Resource) => void,
 ): Resource[] {
   return resources
     .map((resource) =>
-      deserializeRelationship(resource, store, depth, callback),
+      deserializeRelationship(resource, store, depth),
     )
     .filter((resource) => !!resource)
 }
@@ -27,19 +26,17 @@ function deserializeRelationship(
   resource: JsonApiRelatedResource,
   store: NormalizedStore,
   depth: number,
-  callback?: (resource: Resource) => void,
 ): Resource {
-  return deserialize(resource, store, depth, callback) as Resource
+  return deserialize(resource, store, depth) as Resource
 }
 
 export function deserializeMany<Type extends { type: string; id: ID }>(
   result: Type[],
   store: NormalizedStore,
   depth = 0,
-  callback?: (resource: Resource) => void,
 ): Resource[] {
   return result.map((resource) =>
-    deserializeOne(resource, store, depth, callback),
+    deserializeOne(resource, store, depth),
   )
 }
 
@@ -47,16 +44,11 @@ export function deserializeOne<Type extends { type: string; id: ID }>(
   result: Type,
   store: NormalizedStore,
   depth = 0,
-  callback?: (resource: Resource) => void,
 ): Resource {
   const serializedResource: JsonApiResource =
     store[camelCase(result.type)][result.id]
 
-  if (typeof depth == 'number') {
-    depth++
-  } else {
-    depth = 1
-  }
+  depth++
 
   /**
    * If max depth is reached, simply return the serialized resource
@@ -65,7 +57,7 @@ export function deserializeOne<Type extends { type: string; id: ID }>(
     return { ...serializedResource } as Resource
   }
 
-  let resource: Resource = {
+  const resource: Resource = {
     ...serializedResource,
     attributes: camelCaseKeys(serializedResource.attributes),
   }
@@ -79,8 +71,8 @@ export function deserializeOne<Type extends { type: string; id: ID }>(
 
       if (!isEmpty(relationship.data)) {
         data = Array.isArray(relationship.data)
-          ? deserializeRelationships(relationship.data, store, depth, callback)
-          : deserializeRelationship(relationship.data, store, depth, callback)
+          ? deserializeRelationships(relationship.data, store, depth)
+          : deserializeRelationship(relationship.data, store, depth)
       }
 
       return {
@@ -93,10 +85,6 @@ export function deserializeOne<Type extends { type: string; id: ID }>(
     }, {})
   }
 
-  if (callback) {
-    resource = { ...resource, ...(callback(resource) as unknown as Resource) }
-  }
-
   return resource
 }
 
@@ -104,10 +92,9 @@ export function deserialize<Type extends { type: string; id: ID }>(
   result: Type[] | Type,
   store: NormalizedStore,
   depth = 0,
-  callback?: (resource: Resource) => void,
 ): Resource | Resource[] {
   if (Array.isArray(result)) {
-    return deserializeMany(result, store, depth, callback)
+    return deserializeMany(result, store, depth)
   }
-  return deserializeOne(result, store, depth, callback)
+  return deserializeOne(result, store, depth)
 }
