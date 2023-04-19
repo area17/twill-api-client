@@ -1,35 +1,75 @@
-import { BlockResource } from '@/types'
-import { Blockable, ExtractedResource, Resource } from '@/types/resources'
-import { unique } from '@/utils/unique'
-import { camelCase } from 'lodash-es'
+interface DResource {
+  id: string;
+  type: string;
+  attributes?: Record<string, any>;
+  relationships?: Record<string, DResourceRelationship<DResource>>;
+  meta?: Record<string, any>
+  links?: Record<string, any>;
+}
 
-export function editor(
-  resource: Blockable,
-  editorName = 'default',
-): BlockResource[] {
-  if (Array.isArray(resource.blocks)) {
-    return resource.blocks
-      .filter((block) => block.editorName === editorName)
-      .sort((a, b) => a.position - b.position)
+interface DResourceRelationship<T> {
+  data: undefined | T
+  meta?: Record<string, any>
+  links?: Record<string, any>;
+}
+
+interface BlockDRelationship extends DResourceRelationship<BlockDResource[]> {
+  meta: {
+    editors: Record<string, string[]>;
+  };
+}
+
+interface BlockDResource extends DResource {
+  type: 'blocks';
+  attributes: {
+    blockType: string;
+    position: number;
+    content: Record<string, any>;
+  }
+  relationships: {
+    blocks: DResourceRelationship<BlockDResource>;
+  };
+}
+
+function e(editorName: string, relationship: BlockDRelationship ): DResource[] | null {
+  if (typeof relationship.data === 'undefined') {
+    return null
   }
 
-  return []
+  if (!Array.isArray(relationship.data) || !Array.isArray(relationship.meta.editors[editorName])) {
+    return null
+  }
+
+  const ids = relationship.meta.editors[editorName];
+
+  const blocks: BlockDResource[] = ids.map(
+    (id: string) => {
+      if (typeof relationship.data !== 'undefined') {
+        return relationship.data.find((block: BlockDResource) => block.id === id)
+      }
+      return undefined
+    }
+  ).filter(n => n) as BlockDResource[]
+
+  return blocks.sort((a: BlockDResource, b: BlockDResource) => a.attributes.position - b.attributes.position)
 }
 
 export function blocks(
-  resource: Resource | Blockable,
-): ExtractedResource<BlockResource> {
-  if (!resource.blocks) {
+  resource: DResource,
+  editorName: string | null = null
+): Record<string, BlockDResource[]> {
+  if (!resource.relationships?.blocks) {
     return {}
   }
 
-  const editors = {} as ExtractedResource<BlockResource>
+  const relationship = resource.relationships.blocks as BlockDRelationship
+  const editors: Record<string, BlockDResource[]> = {}
 
-  if (Array.isArray(resource.blocks)) {
-    const editorNames = unique(resource.blocks, 'editorName') as string[]
-
-    editorNames.map((editorName) => {
-      editors[camelCase(editorName)] = editor(resource as Blockable, editorName)
+  if (editorName) {
+    editors[editorName] = e(editorName, relationship) as BlockDResource[]
+  } else {
+    Object.keys(relationship.meta.editors).forEach((editorName) => {
+      editors[editorName] = e(editorName, relationship) as BlockDResource[]
     })
   }
 

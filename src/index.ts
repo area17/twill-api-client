@@ -2,7 +2,8 @@ import { QueryBuilder } from '@/query-builder'
 import { ID, JsonApiDataResponse, JsonApiResource, Resource } from '@/types'
 import { normalize } from '@/normalize'
 import { deserialize } from '@/deserialize'
-import { extract } from '@/extract'
+// import { extract } from '@/extract'
+import { blocks } from '@/extract/blocks'
 
 export * from '@/types'
 
@@ -90,7 +91,9 @@ export const Twill = (options: TwillOptions) => {
     findRelationship,
     normalize,
     deserialize,
-    extract,
+    extract: {
+      blocks,
+    },
     transform,
   }
 }
