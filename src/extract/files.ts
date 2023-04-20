@@ -1,42 +1,53 @@
-import { ExtractedResource, Fileable, FileResource, Resource } from '@/types'
-import { camelCaseKeys } from '@/utils/camel-case-keys'
-import { unique } from '@/utils/unique'
+import {camelCaseKeys} from '@/utils/camel-case-keys'
+import {DResource, DResourceRelationship} from './blocks'
 
-export function filesByRole<Type extends Fileable>(
-  resource: Type,
-  role: string,
-): FileResource[] {
-  const filesByUUID: Record<string, FileResource> = {}
-
-  if (Array.isArray(resource.files)) {
-    resource.files
-      .filter((fileable) => {
-        return fileable.meta.role === role
-      })
-      .map((fileable: FileResource) => {
-        filesByUUID[fileable.meta.uuid as string] = fileable
-      })
+interface FileDResource extends DResource {
+  type: 'files';
+  attributes: {
+    createdAt: string
+    updatedAt: string
+    uuid: string
+    filename: string
+    role: string
+    size: string
+    originalSrc: string
   }
+  meta: {
+    role: string
+    uuid: string
+  }
+}
 
-  return Object.values(filesByUUID)
+interface FileDRelationship extends DResourceRelationship<FileDResource[]> {
+  meta: {
+    roles: Record<string, string[]>;
+  }
 }
 
 export function files(
-  resource: Resource | Fileable,
-): ExtractedResource<FileResource> {
-  if (!resource.files) {
+  resource: DResource,
+  role: string | null = null
+): Record<string, FileDResource[]> {
+  if (!resource.relationships?.files) {
     return {}
   }
 
-  const roles: string[] = Array.isArray(resource.files)
-    ? (unique(resource.files, 'meta.role') as string[])
-    : []
+  const relationship = resource.relationships.files as FileDRelationship
+  const files: Record<string, FileDResource[]> = {}
+  let roles = relationship.meta.roles
 
-  const files: ExtractedResource<FileResource> = {}
+  if (role) {
+    roles = { [role]: relationship.meta.roles[role] }
+  }
 
-  roles.map((role) => {
-    files[role] = filesByRole(resource as Fileable, role)
-  })
+  for (const [key, value] of Object.entries(roles)) {
+    files[key] = value.map<FileDResource | null>((id) => {
+      if (typeof relationship.data === 'undefined' || !relationship.data) {
+        return null
+      }
+      return relationship.data.find((file: FileDResource) => file.id === id) as FileDResource
+    }).filter(n => n) as FileDResource[]
+  }
 
-  return camelCaseKeys(files) as ExtractedResource<FileResource>
+  return camelCaseKeys(files) as Record<string, FileDResource[]>
 }

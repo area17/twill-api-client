@@ -5,6 +5,7 @@ import { deserialize } from '@/deserialize'
 // import { extract } from '@/extract'
 import { blocks } from '@/extract/blocks'
 import { media } from '@/extract/media'
+import { files } from '@/extract/files'
 
 export * from '@/types'
 
@@ -95,6 +96,7 @@ export const Twill = (options: TwillOptions) => {
     helpers: {
       getBlocks: blocks,
       getMedia: media,
+      getFiles: files,
     },
     transform,
   }
