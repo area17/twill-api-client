@@ -4,6 +4,7 @@ import { normalize } from '@/normalize'
 import { deserialize } from '@/deserialize'
 // import { extract } from '@/extract'
 import { blocks } from '@/extract/blocks'
+import { media } from '@/extract/media'
 
 export * from '@/types'
 
@@ -91,8 +92,9 @@ export const Twill = (options: TwillOptions) => {
     findRelationship,
     normalize,
     deserialize,
-    extract: {
-      blocks,
+    helpers: {
+      getBlocks: blocks,
+      getMedia: media,
     },
     transform,
   }

@@ -1,50 +1,63 @@
-import { ExtractedResource, Mediable, MediaResource, Resource } from '@/types'
-import { unique } from '@/utils/unique'
-import { camelCaseKeys } from '@/utils/camel-case-keys'
+import {camelCaseKeys} from '@/utils/camel-case-keys'
+import {DResource, DResourceRelationship} from './blocks'
+
+interface MediaDResource extends DResource {
+  type: 'media';
+  attributes: {
+    createdAt: string
+    updatedAt: string
+    uuid: string
+    filename: string
+    role: string
+    crop: string
+    ratio: number
+    lqip: string
+    src: string
+    originalSrc: string
+    width: number
+    height: number
+    alt: string
+    caption: string
+    video: string
+    metadata: Record<string, unknown>
+  }
+  meta: {
+    role: string
+    crop: string
+    uuid: string
+  }
+}
+
+interface MediaDRelationship extends DResourceRelationship<MediaDResource[]> {
+  meta: {
+    roles: Record<string, Record<string, string>[]>;
+  }
+}
 
 export function media(
-  resource: Resource | Mediable,
-): ExtractedResource<Array<Record<string, MediaResource>>> {
-  if (!resource.media) {
+  resource: DResource,
+): Record<string, Record<string, MediaDResource>[]> {
+  if (!resource.relationships?.media) {
     return {}
   }
 
-  const roles: string[] = Array.isArray(resource.media)
-    ? (unique(resource.media, 'meta.role') as string[])
-    : []
+  const relationship = resource.relationships.media as MediaDRelationship
+  const images: Record<string, Record<string, MediaDResource>[]> = {}
 
-  const images: ExtractedResource<Array<Record<string, MediaResource>>> = {}
+  for (const [key, value] of Object.entries(relationship.meta.roles)) {
+    images[key] = value.map<Record<string, MediaDResource>>((image) => {
+      const crops: Record<string, MediaDResource> = {}
 
-  roles.map((role) => {
-    images[role as string] = mediaByRole(resource as Mediable, role)
-  })
-
-  return camelCaseKeys(images) as ExtractedResource<
-    Array<Record<string, MediaResource>>
-  >
-}
-
-export function mediaByRole(
-  resource: Mediable,
-  role: string,
-): Array<Record<string, MediaResource>> {
-  if (!resource.media) {
-    return []
-  }
-
-  const imagesByUUID: Record<string, Record<string, MediaResource>> = {}
-
-  resource.media
-    .filter((media) => {
-      return media.meta.role === role
-    })
-    .map((media) => {
-      if (!imagesByUUID[media.meta.uuid]) {
-        imagesByUUID[media.meta.uuid] = {}
+      for (const [key, value] of Object.entries(image)) {
+        if (typeof relationship.data === 'undefined' || !relationship.data) {
+          break
+        }
+        crops[key] = relationship.data.find((media: MediaDResource) => media.id === value) as MediaDResource
       }
 
-      imagesByUUID[media.meta.uuid][media.meta.crop] = media
+      return crops
     })
+  }
 
-  return Object.values(imagesByUUID)
+  return camelCaseKeys(images) as Record<string, Record<string, MediaDResource>[]>
 }

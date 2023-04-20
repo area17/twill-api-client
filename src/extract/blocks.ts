@@ -1,4 +1,4 @@
-interface DResource {
+export interface DResource {
   id: string;
   type: string;
   attributes?: Record<string, any>;
@@ -7,7 +7,7 @@ interface DResource {
   links?: Record<string, any>;
 }
 
-interface DResourceRelationship<T> {
+export interface DResourceRelationship<T> {
   data: undefined | T
   meta?: Record<string, any>
   links?: Record<string, any>;
@@ -31,7 +31,7 @@ interface BlockDResource extends DResource {
   };
 }
 
-function e(editorName: string, relationship: BlockDRelationship ): DResource[] | null {
+function e(editorName: string, relationship: BlockDRelationship): BlockDResource[] | null {
   if (typeof relationship.data === 'undefined') {
     return null
   }
@@ -57,19 +57,19 @@ function e(editorName: string, relationship: BlockDRelationship ): DResource[] |
 export function blocks(
   resource: DResource,
   editorName: string | null = null
-): Record<string, BlockDResource[]> {
+): Record<string, BlockDResource[] | null> {
   if (!resource.relationships?.blocks) {
     return {}
   }
 
   const relationship = resource.relationships.blocks as BlockDRelationship
-  const editors: Record<string, BlockDResource[]> = {}
+  const editors: Record<string, BlockDResource[] | null> = {}
 
   if (editorName) {
-    editors[editorName] = e(editorName, relationship) as BlockDResource[]
+    editors[editorName] = e(editorName, relationship)
   } else {
     Object.keys(relationship.meta.editors).forEach((editorName) => {
-      editors[editorName] = e(editorName, relationship) as BlockDResource[]
+      editors[editorName] = e(editorName, relationship)
     })
   }
 
