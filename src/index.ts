@@ -6,6 +6,7 @@ import { deserialize } from '@/deserialize'
 import { blocks } from '@/extract/blocks'
 import { media } from '@/extract/media'
 import { files } from '@/extract/files'
+import { browsers } from '@/extract/related-items'
 
 export * from '@/types'
 
@@ -97,6 +98,7 @@ export const Twill = (options: TwillOptions) => {
       getBlocks: blocks,
       getMedia: media,
       getFiles: files,
+      getBrowsers: browsers
     },
     transform,
   }

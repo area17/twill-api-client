@@ -1,65 +1,54 @@
-import {
-  RelatedItemResource,
-  Resource,
-  OrNull,
-  ExtractedResource,
-  RelatedItemable,
-} from '@/types'
-import { unique } from '@/utils/unique'
-import { camelCase } from 'lodash-es'
+import {camelCaseKeys} from '@/utils/camel-case-keys'
+import {DResource, DResourceRelationship} from './blocks'
 
-export function browser(
-  resource: RelatedItemable,
-  browserName: string,
-): Resource[] {
-  const browsers: OrNull<Record<string, number[]>> =
-    (resource.meta?.browsers as any) || null
-  const data: RelatedItemResource[] =
-    resource.relatedItems as RelatedItemResource[]
-
-  return data
-    .filter((resource) => resource.browserName === browserName)
-    .sort((a, b) => a.position - b.position)
-    .map((resource) => resource.related)
-    .filter((resource) => {
-      if (!resource) {
-        return null
-      }
-
-      if (resource.type !== 'blocks') {
-        return true
-      }
-
-      return (
-        browsers !== null &&
-        browsers[browserName] &&
-        browsers[browserName].includes(parseInt(resource.id as string))
-      )
-    })
+interface RelatedItemDResource extends DResource {
+  type: 'related-items';
+  attributes: {
+    browserName: string
+    position: number
+  };
+  relationships: {
+    related:  DResourceRelationship<DResource>
+  };
 }
 
-export function relatedItems(
-  resource: Resource | RelatedItemable,
-): ExtractedResource<Resource> {
-  if (!resource.relatedItems) {
+interface RelatedItemDRelationship extends DResourceRelationship<RelatedItemDResource[]> {
+  meta: {
+    browsers: Record<string, string[]>;
+  }
+}
+
+export function browsers(
+  resource: DResource,
+  name: string | null = null
+): Record<string, DResource[]> {
+  if (!resource.relationships?.relatedItems) {
     return {}
   }
 
-  const browsers: ExtractedResource<Resource> = {}
+  const relationship = resource.relationships.relatedItems as RelatedItemDRelationship
+  const related: Record<string, RelatedItemDResource[]> = {}
+  let browsers = relationship.meta.browsers
 
-  if (Array.isArray(resource?.relatedItems)) {
-    const browserNames: string[] = unique(
-      resource.relatedItems,
-      'browserName',
-    ) as string[]
-
-    browserNames.map((browserName) => {
-      browsers[camelCase(browserName)] = browser(
-        resource as RelatedItemable,
-        browserName,
-      )
-    })
+  if (name) {
+    browsers = { [name]: relationship.meta.browsers[name] }
   }
 
-  return browsers
+  for (const [key, value] of Object.entries(browsers)) {
+    related[key] = value.map<RelatedItemDResource | null>((id) => {
+      if (typeof relationship.data === 'undefined' || !relationship.data) {
+        return null
+      }
+      return relationship.data.find((item: RelatedItemDResource) => item.id === id) as RelatedItemDResource
+    }).filter(n => n) as RelatedItemDResource[]
+  }
+
+  const items: Record<string, DResource[]> =   Object.keys(related).reduce((acc: Record<string, DResource[]>, name) => {
+      acc[name] = related[name]
+        .map((item) => item.relationships.related.data)
+        .filter(n => n) as DResource[]
+      return acc;
+  }, {} as Record<string, DResource[]>)
+
+  return camelCaseKeys(items) as Record<string, DResource[]>
 }
