@@ -16,7 +16,7 @@ export interface JsonApiDataResponse extends JsonApi {
 }
 
 export interface JsonApiErrorResponse extends JsonApi {
-  errors: Error[]
+  errors: JsonApiError[]
 }
 
 export type JsonApiResponse = JsonApiDataResponse | JsonApiErrorResponse
