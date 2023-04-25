@@ -32,7 +32,7 @@ export function deserializeMany<Type extends { type: string; id: ID }>(
   result: Type[],
   store: NormalizedStore,
   depth = 0,
-): Resource[] {
+): (Resource | null)[] {
   return result.map((resource) => deserializeOne(resource, store, depth))
 }
 
@@ -40,7 +40,16 @@ export function deserializeOne<Type extends { type: string; id: ID }>(
   result: Type,
   store: NormalizedStore,
   depth = 0,
-): Resource {
+): Resource | null {
+  if (
+    !result.type ||
+    typeof result.id === 'undefined' ||
+    !store[camelCase(result.type)] ||
+    typeof store[camelCase(result.type)][result.id] === 'undefined'
+  ) {
+    return null
+  }
+
   const serializedResource: JsonApiResource =
     store[camelCase(result.type)][result.id]
 
@@ -55,7 +64,10 @@ export function deserializeOne<Type extends { type: string; id: ID }>(
 
   const resource: Resource = {
     ...serializedResource,
-    attributes: camelCaseKeys(serializedResource.attributes),
+  }
+
+  if (serializedResource.attributes) {
+    resource.attributes = camelCaseKeys(serializedResource.attributes)
   }
 
   if (serializedResource.relationships) {
@@ -88,7 +100,7 @@ export function deserialize<Type extends { type: string; id: ID }>(
   result: Type[] | Type,
   store: NormalizedStore,
   depth = 0,
-): Resource | Resource[] {
+): (Resource | null) | (Resource | null)[] {
   if (Array.isArray(result)) {
     return deserializeMany(result, store, depth)
   }

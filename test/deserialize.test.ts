@@ -18,4 +18,14 @@ test('deserialize', () => {
 
   const blocks = deserialized[0].relationships.blocks
   expect(blocks.data[0].attributes.blockType).toBe('images')
+
+  const emptyIncluded = { ...data, included: [] }
+  const normalizedEmptyIncluded = normalize(emptyIncluded)
+  const deserializedEmptyIncluded = deserialize(
+    normalizedEmptyIncluded.result,
+    normalizedEmptyIncluded.resources,
+  )
+  expect(deserializedEmptyIncluded).toHaveLength(1)
+  expect(deserializedEmptyIncluded[0].relationships.blocks).toBeTypeOf('object')
+  expect(deserializedEmptyIncluded[0].relationships.blocks.data).toHaveLength(0)
 })
