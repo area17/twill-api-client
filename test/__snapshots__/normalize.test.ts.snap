@@ -5,9 +5,14 @@ exports[`normalize 1`] = `
   "resources": {
     "blocks": {
       "1": {
-        "attributes": {},
+        "attributes": {
+          "blockType": "images",
+          "position": 1,
+        },
         "id": "1",
-        "links": undefined,
+        "links": {
+          "self": "#",
+        },
         "meta": undefined,
         "relationships": {},
         "type": "blocks",
@@ -23,7 +28,12 @@ exports[`normalize 1`] = `
         "meta": undefined,
         "relationships": {
           "blocks": {
-            "data": undefined,
+            "data": [
+              {
+                "id": "1",
+                "type": "blocks",
+              },
+            ],
             "links": {
               "related": "#",
               "self": "#",

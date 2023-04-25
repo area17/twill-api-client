@@ -1,0 +1,47 @@
+// Vitest Snapshot v1
+
+exports[`deserialize 1`] = `
+[
+  {
+    "attributes": {
+      "slug": "slug",
+    },
+    "id": "1",
+    "links": {
+      "self": "#",
+    },
+    "meta": undefined,
+    "relationships": {
+      "blocks": {
+        "data": [
+          {
+            "attributes": {
+              "blockType": "images",
+              "position": 1,
+            },
+            "id": "1",
+            "links": {
+              "self": "#",
+            },
+            "meta": undefined,
+            "relationships": {},
+            "type": "blocks",
+          },
+        ],
+        "links": {
+          "related": "#",
+          "self": "#",
+        },
+        "meta": {
+          "editors": {
+            "default": [
+              "1",
+            ],
+          },
+        },
+      },
+    },
+    "type": "pages",
+  },
+]
+`;
