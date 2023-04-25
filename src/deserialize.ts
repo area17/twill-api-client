@@ -16,9 +16,7 @@ function deserializeRelationships(
   depth: number,
 ): Resource[] {
   return resources
-    .map((resource) =>
-      deserializeRelationship(resource, store, depth),
-    )
+    .map((resource) => deserializeRelationship(resource, store, depth))
     .filter((resource) => !!resource)
 }
 
@@ -35,9 +33,7 @@ export function deserializeMany<Type extends { type: string; id: ID }>(
   store: NormalizedStore,
   depth = 0,
 ): Resource[] {
-  return result.map((resource) =>
-    deserializeOne(resource, store, depth),
-  )
+  return result.map((resource) => deserializeOne(resource, store, depth))
 }
 
 export function deserializeOne<Type extends { type: string; id: ID }>(

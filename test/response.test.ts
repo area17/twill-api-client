@@ -1,71 +1,69 @@
-import {expect, test} from 'vitest'
+import { expect, test } from 'vitest'
 
 export const data = {
   jsonapi: {
-    version: "1.0"
+    version: '1.0',
   },
   data: [
     {
       type: 'pages',
-      id: "1",
+      id: '1',
       attributes: {
-        slug: 'slug'
+        slug: 'slug',
       },
       relationships: {
         blocks: {
           links: {
             self: '#',
-            related: '#'
+            related: '#',
           },
           data: [
             {
               type: 'blocks',
-              id: "1"
-            }
+              id: '1',
+            },
           ],
           meta: {
             editors: {
-              default: [
-                "1"
-              ]
-            }
-          }
-        }
+              default: ['1'],
+            },
+          },
+        },
       },
       links: {
-        self: '#'
-      }
-    }
+        self: '#',
+      },
+    },
   ],
   included: [
     {
       type: 'blocks',
-      id: "1",
+      id: '1',
       attributes: {
         blockType: 'images',
         position: 1,
       },
       links: {
-        self: "#"
-      }
-    }
-  ]
+        self: '#',
+      },
+    },
+  ],
 }
 
 export const error = {
   jsonapi: {
-    version: "1.0"
+    version: '1.0',
   },
   errors: [
     {
-      detail: "Include path is not allowed.",
+      detail: 'Include path is not allowed.',
       source: {
-        parameter: "include"
+        parameter: 'include',
       },
-      status: "400",
-      title: "Invalid Query Parameter"
-    }
-  ]
+      status: '400',
+      title: 'Invalid Query Parameter',
+    },
+  ],
 }
 
 test('response', () => {

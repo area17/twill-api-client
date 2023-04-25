@@ -1,4 +1,4 @@
-import {ID, JsonApiError, JsonApiResource} from '@/types'
+import { ID, JsonApiError, JsonApiResource } from '@/types'
 
 export interface NormalizedResult {
   type: string
@@ -15,11 +15,13 @@ export interface NormalizedResources {
 
 export interface NormalizedDataResponse {
   result: NormalizedResult[]
-  resources: NormalizedStore,
+  resources: NormalizedStore
 }
 
 export interface NormalizedErrorResponse {
   errors: JsonApiError[]
 }
 
-export type NormalizedResponse = NormalizedDataResponse | NormalizedErrorResponse
+export type NormalizedResponse =
+  | NormalizedDataResponse
+  | NormalizedErrorResponse

@@ -1,5 +1,5 @@
-import {camelCase} from 'lodash-es'
-import {camelCaseKeys} from '@/utils/camel-case-keys'
+import { camelCase } from 'lodash-es'
+import { camelCaseKeys } from '@/utils/camel-case-keys'
 import {
   JsonApiRelationship,
   JsonApiResource,
@@ -13,9 +13,7 @@ import {
   NormalizedDataResponse,
 } from '@/types'
 
-
 const isError = (x: any): x is JsonApiErrorResponse => !!x.errors
-
 
 /**
  * Normalize the JSON:API response into categories by resource type
@@ -24,7 +22,7 @@ const isError = (x: any): x is JsonApiErrorResponse => !!x.errors
 export function normalize(response: JsonApiResponse): NormalizedResponse {
   if (isError(response)) {
     return {
-      errors: response.errors
+      errors: response.errors,
     } as NormalizedErrorResponse
   }
 
@@ -57,13 +55,13 @@ export function normalize(response: JsonApiResponse): NormalizedResponse {
 }
 
 function addResult(result: NormalizedResult[], resource: JsonApiResource) {
-  const {type, id} = resource
+  const { type, id } = resource
 
-  result.push({type, id})
+  result.push({ type, id })
 }
 
 function addResource(resources: NormalizedStore, resource: JsonApiResource) {
-  const {type, id, attributes, meta, links, relationships} = resource
+  const { type, id, attributes, meta, links, relationships } = resource
 
   const resourceType = camelCase(type)
 

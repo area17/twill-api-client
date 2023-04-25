@@ -1,8 +1,8 @@
-import {camelCaseKeys} from '@/utils/camel-case-keys'
-import {DResource, DResourceRelationship} from './blocks'
+import { camelCaseKeys } from '@/utils/camel-case-keys'
+import { DResource, DResourceRelationship } from './blocks'
 
 interface MediaDResource extends DResource {
-  type: 'media';
+  type: 'media'
   attributes: {
     createdAt: string
     updatedAt: string
@@ -30,7 +30,7 @@ interface MediaDResource extends DResource {
 
 interface MediaDRelationship extends DResourceRelationship<MediaDResource[]> {
   meta: {
-    roles: Record<string, Record<string, string>[]>;
+    roles: Record<string, Record<string, string>[]>
   }
 }
 
@@ -52,12 +52,17 @@ export function media(
         if (typeof relationship.data === 'undefined' || !relationship.data) {
           break
         }
-        crops[key] = relationship.data.find((media: MediaDResource) => media.id === value) as MediaDResource
+        crops[key] = relationship.data.find(
+          (media: MediaDResource) => media.id === value,
+        ) as MediaDResource
       }
 
       return crops
     })
   }
 
-  return camelCaseKeys(images) as Record<string, Record<string, MediaDResource>[]>
+  return camelCaseKeys(images) as Record<
+    string,
+    Record<string, MediaDResource>[]
+  >
 }

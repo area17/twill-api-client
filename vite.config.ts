@@ -1,4 +1,4 @@
-import {resolve} from 'path'
+import { resolve } from 'path'
 import dts from 'vite-plugin-dts'
 
 export default {

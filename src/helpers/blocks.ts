@@ -1,62 +1,73 @@
 export interface DResource {
-  id: string;
-  type: string;
-  attributes?: Record<string, any>;
-  relationships?: Record<string, DResourceRelationship<DResource>>;
+  id: string
+  type: string
+  attributes?: Record<string, any>
+  relationships?: Record<string, DResourceRelationship<DResource>>
   meta?: Record<string, any>
-  links?: Record<string, any>;
+  links?: Record<string, any>
 }
 
 export interface DResourceRelationship<T> {
   data: undefined | T
   meta?: Record<string, any>
-  links?: Record<string, any>;
+  links?: Record<string, any>
 }
 
 interface BlockDRelationship extends DResourceRelationship<BlockDResource[]> {
   meta: {
-    editors: Record<string, string[]>;
-  };
+    editors: Record<string, string[]>
+  }
 }
 
 interface BlockDResource extends DResource {
-  type: 'blocks';
+  type: 'blocks'
   attributes: {
-    blockType: string;
-    position: number;
-    content: Record<string, any>;
+    blockType: string
+    position: number
+    content: Record<string, any>
   }
   relationships: {
-    blocks: DResourceRelationship<BlockDResource>;
-  };
+    blocks: DResourceRelationship<BlockDResource>
+  }
 }
 
-function e(editorName: string, relationship: BlockDRelationship): BlockDResource[] | null {
+function e(
+  editorName: string,
+  relationship: BlockDRelationship,
+): BlockDResource[] | null {
   if (typeof relationship.data === 'undefined') {
     return null
   }
 
-  if (!Array.isArray(relationship.data) || !Array.isArray(relationship.meta.editors[editorName])) {
+  if (
+    !Array.isArray(relationship.data) ||
+    !Array.isArray(relationship.meta.editors[editorName])
+  ) {
     return null
   }
 
-  const ids = relationship.meta.editors[editorName];
+  const ids = relationship.meta.editors[editorName]
 
-  const blocks: BlockDResource[] = ids.map(
-    (id: string) => {
+  const blocks: BlockDResource[] = ids
+    .map((id: string) => {
       if (typeof relationship.data !== 'undefined') {
-        return relationship.data.find((block: BlockDResource) => block.id === id)
+        return relationship.data.find(
+          (block: BlockDResource) => block.id === id,
+        )
       }
       return undefined
-    }
-  ).filter(n => n) as BlockDResource[]
+    })
+    .filter((n) => n) as BlockDResource[]
 
-  return blocks.sort((a: BlockDResource, b: BlockDResource) => a.attributes.position - b.attributes.position)
+  return blocks.sort(
+    (a: BlockDResource, b: BlockDResource) =>
+      a.attributes.position - b.attributes.position,
+  )
 }
 
 export function blocks(
   resource: DResource,
-  editorName: string | null = null
+  editorName: string | null = null,
 ): Record<string, BlockDResource[] | null> {
   if (!resource.relationships?.blocks) {
     return {}

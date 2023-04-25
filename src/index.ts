@@ -1,5 +1,11 @@
 import { QueryBuilder } from '@/query-builder'
-import {ID, JsonApiDataResponse, JsonApiResource, NormalizedErrorResponse, Resource} from '@/types'
+import {
+  ID,
+  JsonApiDataResponse,
+  JsonApiResource,
+  NormalizedErrorResponse,
+  Resource,
+} from '@/types'
 import { normalize } from '@/normalize'
 import { deserialize } from '@/deserialize'
 import { blocks } from '@/helpers/blocks'
@@ -84,11 +90,7 @@ export const Twill = (options: TwillOptions) => {
       return [] as Resource[]
     }
 
-    return deserialize(
-      normalized.result,
-      normalized.resources,
-      0,
-    ) as Resource[]
+    return deserialize(normalized.result, normalized.resources, 0) as Resource[]
   }
 
   return {
@@ -103,7 +105,7 @@ export const Twill = (options: TwillOptions) => {
       getBlocks: blocks,
       getMedia: media,
       getFiles: files,
-      getBrowsers: browsers
+      getBrowsers: browsers,
     },
     transform,
   }
