@@ -20,7 +20,9 @@ exports[`normalize 1`] = `
     },
     "pages": {
       "1": {
-        "attributes": {},
+        "attributes": {
+          "slug": "slug",
+        },
         "id": "1",
         "links": {
           "self": "#",

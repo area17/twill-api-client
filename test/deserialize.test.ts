@@ -1,7 +1,7 @@
 import {expect, test} from 'vitest'
 import {normalize} from '../src/normalize'
 import {deserialize} from '../src/deserialize'
-import {data, error} from './response.test'
+import {data} from './response.test'
 
 test('deserialize', () => {
   const normalized = normalize(data)
